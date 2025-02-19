@@ -4,6 +4,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flet/flet.dart';
 import 'package:flutter/material.dart';
 
+import 'data_sources.dart';
+
 class FletDataTable2Control extends StatefulWidget {
   final Control? parent;
   final Control control;
@@ -26,6 +28,45 @@ class FletDataTable2Control extends StatefulWidget {
 
 class _FletDataTable2ControlState extends State<FletDataTable2Control>
     with FletStoreMixin {
+  bool _sortAscending = true;
+  int? _sortColumnIndex;
+  late DessertDataSource _dessertsDataSource;
+  bool _initialized = false;
+  final ScrollController _controller = ScrollController();
+  final ScrollController _horizontalController = ScrollController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _dessertsDataSource = DessertDataSource(context);
+      _initialized = true;
+      _dessertsDataSource.addListener(() {
+        setState(() {});
+      });
+    }
+  }
+
+  void _sort<T>(
+    Comparable<T> Function(Dessert d) getField,
+    int columnIndex,
+    bool ascending,
+  ) {
+    _dessertsDataSource.sort<T>(getField, ascending);
+    setState(() {
+      _sortColumnIndex = columnIndex;
+      _sortAscending = ascending;
+    });
+  }
+
+  @override
+  void dispose() {
+    _dessertsDataSource.dispose();
+    _controller.dispose();
+    _horizontalController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     debugPrint("DataTableControl build: ${widget.control.id}");
@@ -70,40 +111,75 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
     //       parseClip(widget.control.attrString("clipBehavior"), Clip.none)!;
 
     var datatable = DataTable2(
-        columnSpacing: 12,
+        scrollController: _controller,
+        horizontalScrollController: _horizontalController,
+        columnSpacing: 0,
         horizontalMargin: 12,
+        bottomMargin: 10,
         minWidth: 600,
-        smRatio: 0.75,
-        lmRatio: 1.5,
-        columns: const [
+        sortColumnIndex: _sortColumnIndex,
+        sortAscending: _sortAscending,
+        onSelectAll: (val) =>
+            setState(() => _dessertsDataSource.selectAll(val)),
+        columns: [
           DataColumn2(
+            label: const Text('Desert'),
             size: ColumnSize.S,
-            label: Text('Column A'),
-          ),
-          DataColumn(
-            label: Text('Column B'),
-          ),
-          DataColumn(
-            label: Text('Column C'),
-          ),
-          DataColumn(
-            label: Text('Column D'),
+            onSort: (columnIndex, ascending) =>
+                _sort<String>((d) => d.name, columnIndex, ascending),
           ),
           DataColumn2(
-            label: Text('Column NUMBERS'),
+            label: const Text('Calories'),
+            size: ColumnSize.S,
             numeric: true,
-            size: ColumnSize.L,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.calories, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Fat (gm)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.fat, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Carbs (gm)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.carbs, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Protein (gm)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.protein, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Sodium (mg)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.sodium, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Calcium (%)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.calcium, columnIndex, ascending),
+          ),
+          DataColumn2(
+            label: const Text('Iron (%)'),
+            size: ColumnSize.S,
+            numeric: true,
+            onSort: (columnIndex, ascending) =>
+                _sort<num>((d) => d.iron, columnIndex, ascending),
           ),
         ],
-        rows: List<DataRow>.generate(
-            100,
-            (index) => DataRow(cells: [
-                  DataCell(Text('A' * (10 - index % 10))),
-                  DataCell(Text('B' * (10 - (index + 5) % 10))),
-                  DataCell(Text('C' * (15 - (index + 5) % 10))),
-                  DataCell(Text('D' * (15 - (index + 10) % 10))),
-                  DataCell(Text(((index + 0.1) * 25.4).toString()))
-                ])));
+        rows: List<DataRow>.generate(_dessertsDataSource.rowCount,
+            (index) => _dessertsDataSource.getRow(index)));
 
     return constrainedControl(
         context, datatable, widget.parent, widget.control);

@@ -1,8 +1,9 @@
 from enum import Enum
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 from flet.core.constrained_control import ConstrainedControl
 from flet.core.control import OptionalNumber
+
 
 class FletDataTable2(ConstrainedControl):
     """
@@ -25,6 +26,7 @@ class FletDataTable2(ConstrainedControl):
         top: OptionalNumber = None,
         right: OptionalNumber = None,
         bottom: OptionalNumber = None,
+        expand: Union[None, bool, int] = None,
         #
         # FletDataTable2 specific
         #
@@ -40,6 +42,7 @@ class FletDataTable2(ConstrainedControl):
             top=top,
             right=right,
             bottom=bottom,
+            expand=expand,
         )
 
         self.value = value

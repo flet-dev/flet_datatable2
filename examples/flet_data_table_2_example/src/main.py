@@ -9,6 +9,7 @@ def main(page: ft.Page):
 
     page.add(
         FletDataTable2(
+            expand=True,
             tooltip="My new FletDataTable2 Control tooltip",
             value="My new FletDataTable2 Flet Control",
         )
