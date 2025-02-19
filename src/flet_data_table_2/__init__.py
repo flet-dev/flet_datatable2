@@ -1,0 +1,1 @@
+from flet_data_table_2.flet_data_table_2 import FletDataTable2
