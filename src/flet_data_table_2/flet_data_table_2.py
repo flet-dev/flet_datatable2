@@ -31,6 +31,7 @@ class FletDataTable2(ConstrainedControl):
         # FletDataTable2 specific
         #
         value: Optional[str] = None,
+        column_spacing: OptionalNumber = None,
     ):
         ConstrainedControl.__init__(
             self,
@@ -46,6 +47,7 @@ class FletDataTable2(ConstrainedControl):
         )
 
         self.value = value
+        self.column_spacing = column_spacing
 
     def _get_control_name(self):
         return "flet_data_table_2"
@@ -58,3 +60,12 @@ class FletDataTable2(ConstrainedControl):
     @value.setter
     def value(self, value):
         self._set_attr("value", value)
+
+    # column_spacing
+    @property
+    def column_spacing(self) -> OptionalNumber:
+        return self._get_attr("columnSpacing")
+
+    @column_spacing.setter
+    def column_spacing(self, value: OptionalNumber):
+        self._set_attr("columnSpacing", value)

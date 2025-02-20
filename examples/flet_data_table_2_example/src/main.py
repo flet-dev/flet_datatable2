@@ -8,10 +8,15 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     page.add(
-        FletDataTable2(
+        ft.Container(
             expand=True,
-            tooltip="My new FletDataTable2 Control tooltip",
-            value="My new FletDataTable2 Flet Control",
+            padding=20,
+            content=FletDataTable2(
+                column_spacing=0,
+                expand=True,
+                tooltip="My new FletDataTable2 Control tooltip",
+                value="My new FletDataTable2 Flet Control",
+            ),
         )
     )
 

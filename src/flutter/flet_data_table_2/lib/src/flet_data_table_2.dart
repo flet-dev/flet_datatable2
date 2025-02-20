@@ -113,7 +113,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
     var datatable = DataTable2(
         scrollController: _controller,
         horizontalScrollController: _horizontalController,
-        columnSpacing: 0,
+        columnSpacing: widget.control.attrDouble("columnSpacing"),
         horizontalMargin: 12,
         bottomMargin: 10,
         minWidth: 600,
