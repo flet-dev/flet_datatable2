@@ -1,26 +1,24 @@
-//library;
+import 'dart:convert';
 
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flet/flet.dart' as ft;
 import 'package:flet/flet.dart';
 import 'package:flutter/material.dart';
-
-import 'data_sources.dart';
 
 class FletDataTable2Control extends StatefulWidget {
   final Control? parent;
   final Control control;
-  //final List<Control> children;
-  //final bool parentDisabled;
-  //final FletControlBackend backend;
+  final List<Control> children;
+  final bool parentDisabled;
+  final FletControlBackend backend;
 
-  const FletDataTable2Control({
-    super.key,
-    this.parent,
-    required this.control,
-    //required this.children,
-    //required this.parentDisabled,
-    //required this.backend
-  });
+  const FletDataTable2Control(
+      {super.key,
+      this.parent,
+      required this.control,
+      required this.children,
+      required this.parentDisabled,
+      required this.backend});
 
   @override
   State<FletDataTable2Control> createState() => _FletDataTable2ControlState();
@@ -28,158 +26,176 @@ class FletDataTable2Control extends StatefulWidget {
 
 class _FletDataTable2ControlState extends State<FletDataTable2Control>
     with FletStoreMixin {
-  bool _sortAscending = true;
-  int? _sortColumnIndex;
-  late DessertDataSource _dessertsDataSource;
-  bool _initialized = false;
-  final ScrollController _controller = ScrollController();
-  final ScrollController _horizontalController = ScrollController();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_initialized) {
-      _dessertsDataSource = DessertDataSource(context);
-      _initialized = true;
-      _dessertsDataSource.addListener(() {
-        setState(() {});
-      });
-    }
-  }
-
-  void _sort<T>(
-    Comparable<T> Function(Dessert d) getField,
-    int columnIndex,
-    bool ascending,
-  ) {
-    _dessertsDataSource.sort<T>(getField, ascending);
-    setState(() {
-      _sortColumnIndex = columnIndex;
-      _sortAscending = ascending;
-    });
-  }
-
-  @override
-  void dispose() {
-    _dessertsDataSource.dispose();
-    _controller.dispose();
-    _horizontalController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     debugPrint("DataTableControl build: ${widget.control.id}");
 
-    // bool tableDisabled = widget.control.isDisabled || widget.parentDisabled;
+    bool tableDisabled = widget.control.isDisabled || widget.parentDisabled;
 
-    // var datatable =
-    //     withControls(widget.children.where((c) => c.isVisible).map((c) => c.id),
-    //         (content, viewModel) {
-    //   var bgColor = widget.control.attrString("bgColor");
-    //   var border = parseBorder(Theme.of(context), widget.control, "border");
-    //   var borderRadius = parseBorderRadius(widget.control, "borderRadius");
-    //   var gradient =
-    //       parseGradient(Theme.of(context), widget.control, "gradient");
-    //   var horizontalLines =
-    //       parseBorderSide(Theme.of(context), widget.control, "horizontalLines");
-    //   var verticalLines =
-    //       parseBorderSide(Theme.of(context), widget.control, "verticalLines");
-    //   var defaultDecoration =
-    //       Theme.of(context).dataTableTheme.decoration ?? const BoxDecoration();
+    var datatable =
+        withControls(widget.children.where((c) => c.isVisible).map((c) => c.id),
+            (content, viewModel) {
+      var bgColor = widget.control.attrString("bgColor");
+      var border = parseBorder(Theme.of(context), widget.control, "border");
+      var borderRadius = parseBorderRadius(widget.control, "borderRadius");
+      var gradient =
+          parseGradient(Theme.of(context), widget.control, "gradient");
+      var horizontalLines =
+          parseBorderSide(Theme.of(context), widget.control, "horizontalLines");
+      var verticalLines =
+          parseBorderSide(Theme.of(context), widget.control, "verticalLines");
+      var defaultDecoration =
+          Theme.of(context).dataTableTheme.decoration ?? const BoxDecoration();
 
-    //   BoxDecoration? decoration;
-    //   if (bgColor != null ||
-    //       border != null ||
-    //       borderRadius != null ||
-    //       gradient != null) {
-    //     decoration = (defaultDecoration as BoxDecoration).copyWith(
-    //         color: parseColor(Theme.of(context), bgColor),
-    //         border: border,
-    //         borderRadius: borderRadius,
-    //         gradient: gradient);
-    //   }
+      BoxDecoration? decoration;
+      if (bgColor != null ||
+          border != null ||
+          borderRadius != null ||
+          gradient != null) {
+        decoration = (defaultDecoration as BoxDecoration).copyWith(
+            color: parseColor(Theme.of(context), bgColor),
+            border: border,
+            borderRadius: borderRadius,
+            gradient: gradient);
+      }
 
-    //   TableBorder? tableBorder;
-    //   if (horizontalLines != null || verticalLines != null) {
-    //     tableBorder = TableBorder(
-    //         horizontalInside: horizontalLines ?? BorderSide.none,
-    //         verticalInside: verticalLines ?? BorderSide.none);
-    //   }
+      TableBorder? tableBorder;
+      if (horizontalLines != null || verticalLines != null) {
+        tableBorder = TableBorder(
+            horizontalInside: horizontalLines ?? BorderSide.none,
+            verticalInside: verticalLines ?? BorderSide.none);
+      }
 
-    //   Clip clipBehavior =
-    //       parseClip(widget.control.attrString("clipBehavior"), Clip.none)!;
+      Clip clipBehavior =
+          parseClip(widget.control.attrString("clipBehavior"), Clip.none)!;
 
-    var datatable = DataTable2(
-        scrollController: _controller,
-        horizontalScrollController: _horizontalController,
-        columnSpacing: widget.control.attrDouble("columnSpacing"),
-        horizontalMargin: 12,
-        bottomMargin: 10,
-        minWidth: 600,
-        sortColumnIndex: _sortColumnIndex,
-        sortAscending: _sortAscending,
-        onSelectAll: (val) =>
-            setState(() => _dessertsDataSource.selectAll(val)),
-        columns: [
-          DataColumn2(
-            label: const Text('Desert'),
-            size: ColumnSize.S,
-            onSort: (columnIndex, ascending) =>
-                _sort<String>((d) => d.name, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Calories'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.calories, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Fat (gm)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.fat, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Carbs (gm)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.carbs, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Protein (gm)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.protein, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Sodium (mg)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.sodium, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Calcium (%)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.calcium, columnIndex, ascending),
-          ),
-          DataColumn2(
-            label: const Text('Iron (%)'),
-            size: ColumnSize.S,
-            numeric: true,
-            onSort: (columnIndex, ascending) =>
-                _sort<num>((d) => d.iron, columnIndex, ascending),
-          ),
-        ],
-        rows: List<DataRow>.generate(_dessertsDataSource.rowCount,
-            (index) => _dessertsDataSource.getRow(index)));
+      return DataTable2(
+          decoration: decoration,
+          border: tableBorder,
+          clipBehavior: clipBehavior,
+          checkboxHorizontalMargin:
+              widget.control.attrDouble("checkboxHorizontalMargin"),
+          columnSpacing: widget.control.attrDouble("columnSpacing"),
+          dataRowColor: parseWidgetStateColor(
+              Theme.of(context), widget.control, "dataRowColor"),
+          //dataRowMinHeight: widget.control.attrDouble("dataRowMinHeight"),
+          //dataRowMaxHeight: widget.control.attrDouble("dataRowMaxHeight"),
+          dataTextStyle: parseTextStyle(
+              Theme.of(context), widget.control, "dataTextStyle"),
+          headingRowColor: parseWidgetStateColor(
+              Theme.of(context), widget.control, "headingRowColor"),
+          headingRowHeight: widget.control.attrDouble("headingRowHeight"),
+          headingTextStyle: parseTextStyle(
+              Theme.of(context), widget.control, "headingTextStyle"),
+          dividerThickness: widget.control.attrDouble("dividerThickness"),
+          horizontalMargin: widget.control.attrDouble("horizontalMargin"),
+          showBottomBorder: widget.control.attrBool("showBottomBorder", false)!,
+          showCheckboxColumn:
+              widget.control.attrBool("showCheckboxColumn", false)!,
+          sortAscending: widget.control.attrBool("sortAscending", false)!,
+          sortColumnIndex: widget.control.attrInt("sortColumnIndex"),
+          onSelectAll: widget.control.attrBool("onSelectAll", false)!
+              ? (selected) {
+                  widget.backend.triggerControlEvent(
+                      widget.control.id,
+                      "select_all",
+                      selected != null ? selected.toString() : "");
+                }
+              : null,
+          columns: viewModel.controlViews
+              .where(
+                  (c) => c.control.type == "datacolumn2" && c.control.isVisible)
+              .map((column) {
+            var labelCtrls =
+                column.children.where((c) => c.name == "label" && c.isVisible);
+            return DataColumn2(
+                numeric: column.control.attrBool("numeric", false)!,
+                tooltip: column.control.attrString("tooltip"),
+                headingRowAlignment: parseMainAxisAlignment(
+                    column.control.attrString("headingRowAlignment")),
+                //mouseCursor: WidgetStateMouseCursor.clickable,
+                onSort: column.control.attrBool("onSort", false)!
+                    ? (columnIndex, ascending) {
+                        widget.backend.triggerControlEvent(
+                            column.control.id,
+                            "sort",
+                            json.encode({"i": columnIndex, "a": ascending}));
+                      }
+                    : null,
+                label: ft.createControl(column.control, labelCtrls.first.id,
+                    column.control.isDisabled || tableDisabled));
+          }).toList(),
+          rows: viewModel.controlViews
+              .where((c) => c.control.type == "datarow2" && c.control.isVisible)
+              .map((row) {
+            return DataRow2(
+                key: ValueKey(row.control.id),
+                selected: row.control.attrBool("selected", false)!,
+                color: parseWidgetStateColor(
+                    Theme.of(context), row.control, "color"),
+                onSelectChanged: row.control.attrBool("onSelectChanged", false)!
+                    ? (selected) {
+                        widget.backend.triggerControlEvent(
+                            row.control.id,
+                            "select_changed",
+                            selected != null ? selected.toString() : "");
+                      }
+                    : null,
+                onLongPress: row.control.attrBool("onLongPress", false)!
+                    ? () {
+                        widget.backend
+                            .triggerControlEvent(row.control.id, "long_press");
+                      }
+                    : null,
+                cells: row.children
+                    .where((c) => c.type == "datacell" && c.isVisible)
+                    .map((cell) => DataCell(
+                          ft.createControl(row.control, cell.childIds.first,
+                              row.control.isDisabled || tableDisabled),
+                          placeholder: cell.attrBool("placeholder", false)!,
+                          showEditIcon: cell.attrBool("showEditIcon", false)!,
+                          onDoubleTap: cell.attrBool("onDoubleTap", false)!
+                              ? () {
+                                  widget.backend.triggerControlEvent(
+                                      cell.id, "double_tap");
+                                }
+                              : null,
+                          onLongPress: cell.attrBool("onLongPress", false)!
+                              ? () {
+                                  widget.backend.triggerControlEvent(
+                                      cell.id, "long_press");
+                                }
+                              : null,
+                          onTap: cell.attrBool("onTap", false)!
+                              ? () {
+                                  widget.backend
+                                      .triggerControlEvent(cell.id, "tap");
+                                }
+                              : null,
+                          onTapCancel: cell.attrBool("onTapCancel", false)!
+                              ? () {
+                                  widget.backend.triggerControlEvent(
+                                      cell.id, "tap_cancel");
+                                }
+                              : null,
+                          onTapDown: cell.attrBool("onTapDown", false)!
+                              ? (details) {
+                                  widget.backend.triggerControlEvent(
+                                      cell.id,
+                                      "tap_down",
+                                      json.encode({
+                                        "kind": details.kind?.name,
+                                        "lx": details.localPosition.dx,
+                                        "ly": details.localPosition.dy,
+                                        "gx": details.globalPosition.dx,
+                                        "gy": details.globalPosition.dy,
+                                      }));
+                                }
+                              : null,
+                        ))
+                    .toList());
+          }).toList());
+    });
 
     return constrainedControl(
         context, datatable, widget.parent, widget.control);
