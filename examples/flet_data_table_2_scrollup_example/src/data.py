@@ -192,7 +192,7 @@ desserts = [
         2,
     ),
     Dessert(
-        "Honeycomd with sugar",
+        "Honeycomb with sugar",
         417,
         3.2,
         89,
@@ -222,7 +222,7 @@ desserts = [
         6,
     ),
     Dessert(
-        "Forzen yougurt with honey",
+        "Frozen yougurt with honey",
         223,
         6.0,
         36,
@@ -262,7 +262,7 @@ desserts = [
         8,
     ),
     Dessert(
-        "Gignerbread with hone",
+        "Gingerbread with hone",
         420,
         16.0,
         61,
@@ -292,7 +292,7 @@ desserts = [
         2,
     ),
     Dessert(
-        "Honeycomd with honey",
+        "Honeycomb with honey",
         472,
         3.2,
         99,
