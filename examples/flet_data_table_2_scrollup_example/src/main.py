@@ -12,6 +12,10 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
+    def select_row(e):
+        e.control.selected = not e.control.selected
+        e.control.update()
+
     def sort_column(e):
         dt.sort_column_index = e.column_index
         dt.sort_ascending = e.ascending
@@ -44,7 +48,7 @@ def main(page: ft.Page):
         for dessert in desserts:
             data_rows.append(
                 DataRow2(
-                    on_select_changed=lambda e: print(f"row select changed: {e.data}"),
+                    on_select_changed=select_row,
                     cells=[
                         ft.DataCell(content=ft.Text(dessert.name)),
                         ft.DataCell(content=ft.Text(dessert.calories)),
@@ -66,20 +70,6 @@ def main(page: ft.Page):
             column_spacing=0,
             horizontal_margin=12,
             sort_ascending=True,
-            # width=700,
-            # bgcolor="yellow",
-            # border=ft.border.all(2, "red"),
-            # border_radius=10,
-            # vertical_lines=ft.BorderSide(3, "blue"),
-            # horizontal_lines=ft.BorderSide(1, "green"),
-            # sort_column_index=0,
-            # sort_ascending=True,
-            # heading_row_color=ft.Colors.BLACK12,
-            # heading_row_height=100,
-            # data_row_color={ft.ControlState.HOVERED: "0x30FF0000"},
-            # show_checkbox_column=True,
-            # divider_thickness=0,
-            # column_spacing=200,
             columns=get_data_columns(),
             rows=get_data_rows(desserts),
         ),
@@ -87,11 +77,3 @@ def main(page: ft.Page):
 
 
 ft.app(main)
-
-
-#   columnSpacing: 0,
-#   horizontalMargin: 12,
-#   bottomMargin: 10,
-#   minWidth: 600,
-#   sortColumnIndex: _sortColumnIndex,
-#   sortAscending: _sortAscending,
