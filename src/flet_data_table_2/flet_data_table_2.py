@@ -340,6 +340,8 @@ class FletDataTable2(ConstrainedControl):
         self,
         columns: List[DataColumn2],
         rows: Optional[List[DataRow2]] = None,
+        bottom_margin: OptionalNumber = None,
+        min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
         sort_column_index: Optional[int] = None,
@@ -429,6 +431,8 @@ class FletDataTable2(ConstrainedControl):
 
         self.columns = columns
         self.rows = rows
+        self.bottom_margin = bottom_margin
+        self.min_width = min_width
         self.border = border
         self.border_radius = border_radius
         self.horizontal_lines = horizontal_lines
@@ -517,6 +521,24 @@ class FletDataTable2(ConstrainedControl):
         assert all(
             isinstance(row, DataRow2) for row in self.__rows
         ), "rows must contain only DataRow instances"
+
+    # bottom_margin
+    @property
+    def bottom_margin(self) -> OptionalNumber:
+        return self._get_attr("bottomMargin")
+
+    @bottom_margin.setter
+    def bottom_margin(self, value: OptionalNumber):
+        self._set_attr("bottomMargin", value)
+
+    # min_width
+    @property
+    def min_width(self) -> OptionalNumber:
+        return self._get_attr("minWidth")
+
+    @min_width.setter
+    def min_width(self, value: OptionalNumber):
+        self._set_attr("minWidth", value)
 
     # border
     @property

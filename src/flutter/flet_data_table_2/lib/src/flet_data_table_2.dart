@@ -26,6 +26,16 @@ class FletDataTable2Control extends StatefulWidget {
 
 class _FletDataTable2ControlState extends State<FletDataTable2Control>
     with FletStoreMixin {
+  //final ScrollController _horizontalController = ScrollController();
+  //final ScrollController _controller = ScrollController();
+
+  // @override
+  // void dispose() {
+  //   _horizontalController.dispose();
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     debugPrint("DataTableControl build: ${widget.control.id}");
@@ -70,6 +80,10 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           parseClip(widget.control.attrString("clipBehavior"), Clip.none)!;
 
       return DataTable2(
+          bottomMargin: widget.control.attrDouble("bottomMargin"),
+          minWidth: widget.control.attrDouble("minWidth"),
+          //horizontalScrollController: _horizontalController,
+          //scrollController: _controller,
           decoration: decoration,
           border: tableBorder,
           clipBehavior: clipBehavior,

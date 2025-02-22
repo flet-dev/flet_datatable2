@@ -70,6 +70,8 @@ def main(page: ft.Page):
             column_spacing=0,
             horizontal_margin=12,
             sort_ascending=True,
+            bottom_margin=100,
+            min_width=600,
             columns=get_data_columns(),
             rows=get_data_rows(desserts),
         ),
@@ -77,3 +79,8 @@ def main(page: ft.Page):
 
 
 ft.app(main)
+
+# horizontalScrollController: _horizontalController,
+
+# bottomMargin: 10,
+# minWidth: 600,

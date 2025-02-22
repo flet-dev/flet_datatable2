@@ -257,7 +257,7 @@ requires-dist = [{ name = "flet", specifier = ">=0.26.0" }]
 dev = [{ name = "flet", extras = ["all"], specifier = "==0.26.0" }]
 
 [[package]]
-name = "flet-data-table-2-example"
+name = "flet-data-table-2-scrollup-example"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

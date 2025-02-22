@@ -1,5 +1,5 @@
 [project]
-name = "flet-data-table-2-example"
+name = "flet-data-table-2-scrollup-example"
 version = "1.0.0"
 description = ""
 readme = "README.md"
@@ -19,7 +19,7 @@ org = "com.mycompany"
 
 # project display name that is used as an app title on Android and iOS home screens,
 # shown in window titles and about app dialogs on desktop.
-product = "flet-data-table-2-example"
+product = "flet-data-table-2-scrollup-example"
 
 # company name to display in about app dialogs
 company = "Flet"
