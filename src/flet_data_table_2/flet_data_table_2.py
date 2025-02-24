@@ -1,4 +1,5 @@
 import json
+from enum import Enum
 from typing import Any, List, Optional, Union
 
 from flet.core.animation import AnimationValue
@@ -7,6 +8,7 @@ from flet.core.border import Border, BorderSide
 from flet.core.constrained_control import ConstrainedControl
 from flet.core.control import Control, OptionalNumber
 from flet.core.control_event import ControlEvent
+from flet.core.datatable import DataCell
 from flet.core.event_handler import EventHandler
 from flet.core.gesture_detector import TapEvent
 from flet.core.gradients import Gradient
@@ -29,6 +31,12 @@ from flet.core.types import (
 )
 
 
+class Size(Enum):
+    S = "small"
+    M = "medium"
+    L = "large"
+
+
 class DataColumnSortEvent(ControlEvent):
     def __init__(self, e: ControlEvent):
         super().__init__(e.target, e.name, e.data, e.control, e.page)
@@ -41,6 +49,7 @@ class DataColumn2(Control):
     def __init__(
         self,
         label: Control,
+        size: Optional[Size] = None,
         numeric: Optional[bool] = None,
         tooltip: Optional[str] = None,
         heading_row_alignment: Optional[MainAxisAlignment] = None,
@@ -59,6 +68,7 @@ class DataColumn2(Control):
         self._add_event_handler("sort", self.__on_sort.get_handler())
 
         self.label = label
+        self.size = size
         self.numeric = numeric
         self.tooltip = tooltip
         self.heading_row_alignment = heading_row_alignment
@@ -83,6 +93,16 @@ class DataColumn2(Control):
     @label.setter
     def label(self, value: Control):
         self.__label = value
+
+    # size
+    @property
+    def size(self) -> Optional[Size]:
+        return self.__size
+
+    @size.setter
+    def size(self, value: Optional[Size]):
+        self.__size = value
+        self._set_enum_attr("size", value, Size)
 
     # numeric
     @property
@@ -123,125 +143,125 @@ class DataColumn2(Control):
         self._set_attr("onSort", True if handler is not None else None)
 
 
-class DataCell(Control):
-    def __init__(
-        self,
-        content: Control,
-        placeholder: Optional[bool] = None,
-        show_edit_icon: Optional[bool] = None,
-        on_tap: OptionalControlEventCallable = None,
-        on_double_tap: OptionalControlEventCallable = None,
-        on_long_press: OptionalControlEventCallable = None,
-        on_tap_cancel: OptionalControlEventCallable = None,
-        on_tap_down: OptionalEventCallable[TapEvent] = None,
-        #
-        # Control
-        #
-        ref=None,
-        visible: Optional[bool] = None,
-        disabled: Optional[bool] = None,
-        data: Any = None,
-    ):
-        Control.__init__(self, ref=ref, visible=visible, disabled=disabled, data=data)
+# class DataCell(Control):
+#     def __init__(
+#         self,
+#         content: Control,
+#         placeholder: Optional[bool] = None,
+#         show_edit_icon: Optional[bool] = None,
+#         on_tap: OptionalControlEventCallable = None,
+#         on_double_tap: OptionalControlEventCallable = None,
+#         on_long_press: OptionalControlEventCallable = None,
+#         on_tap_cancel: OptionalControlEventCallable = None,
+#         on_tap_down: OptionalEventCallable[TapEvent] = None,
+#         #
+#         # Control
+#         #
+#         ref=None,
+#         visible: Optional[bool] = None,
+#         disabled: Optional[bool] = None,
+#         data: Any = None,
+#     ):
+#         Control.__init__(self, ref=ref, visible=visible, disabled=disabled, data=data)
 
-        self.__on_tap_down = EventHandler(lambda e: TapEvent(e))
-        self._add_event_handler("tap_down", self.__on_tap_down.get_handler())
+#         self.__on_tap_down = EventHandler(lambda e: TapEvent(e))
+#         self._add_event_handler("tap_down", self.__on_tap_down.get_handler())
 
-        self.content = content
-        self.on_double_tap = on_double_tap
-        self.on_long_press = on_long_press
-        self.on_tap = on_tap
-        self.on_tap_cancel = on_tap_cancel
-        self.on_tap_down = on_tap_down
-        self.placeholder = placeholder
-        self.show_edit_icon = show_edit_icon
+#         self.content = content
+#         self.on_double_tap = on_double_tap
+#         self.on_long_press = on_long_press
+#         self.on_tap = on_tap
+#         self.on_tap_cancel = on_tap_cancel
+#         self.on_tap_down = on_tap_down
+#         self.placeholder = placeholder
+#         self.show_edit_icon = show_edit_icon
 
-    def _get_control_name(self):
-        return "datacell"
+#     def _get_control_name(self):
+#         return "datacell"
 
-    def _get_children(self):
-        return [self.__content]
+#     def _get_children(self):
+#         return [self.__content]
 
-    def before_update(self):
-        super().before_update()
-        assert self.__content.visible, "content must be visible"
+#     def before_update(self):
+#         super().before_update()
+#         assert self.__content.visible, "content must be visible"
 
-    # content
-    @property
-    def content(self) -> Control:
-        return self.__content
+#     # content
+#     @property
+#     def content(self) -> Control:
+#         return self.__content
 
-    @content.setter
-    def content(self, value: Control):
-        self.__content = value
+#     @content.setter
+#     def content(self, value: Control):
+#         self.__content = value
 
-    # placeholder
-    @property
-    def placeholder(self) -> bool:
-        return self._get_attr("placeholder", data_type="bool", def_value=False)
+#     # placeholder
+#     @property
+#     def placeholder(self) -> bool:
+#         return self._get_attr("placeholder", data_type="bool", def_value=False)
 
-    @placeholder.setter
-    def placeholder(self, value: Optional[bool]):
-        self._set_attr("placeholder", value)
+#     @placeholder.setter
+#     def placeholder(self, value: Optional[bool]):
+#         self._set_attr("placeholder", value)
 
-    # show_edit_icon
-    @property
-    def show_edit_icon(self) -> bool:
-        return self._get_attr("showEditIcon", data_type="bool", def_value=False)
+#     # show_edit_icon
+#     @property
+#     def show_edit_icon(self) -> bool:
+#         return self._get_attr("showEditIcon", data_type="bool", def_value=False)
 
-    @show_edit_icon.setter
-    def show_edit_icon(self, value: Optional[bool]):
-        self._set_attr("showEditIcon", value)
+#     @show_edit_icon.setter
+#     def show_edit_icon(self, value: Optional[bool]):
+#         self._set_attr("showEditIcon", value)
 
-    # on_double_tap
-    @property
-    def on_double_tap(self) -> OptionalControlEventCallable:
-        return self._get_event_handler("double_tap")
+#     # on_double_tap
+#     @property
+#     def on_double_tap(self) -> OptionalControlEventCallable:
+#         return self._get_event_handler("double_tap")
 
-    @on_double_tap.setter
-    def on_double_tap(self, handler: OptionalControlEventCallable):
-        self._add_event_handler("double_tap", handler)
-        self._set_attr("onDoubleTap", True if handler is not None else None)
+#     @on_double_tap.setter
+#     def on_double_tap(self, handler: OptionalControlEventCallable):
+#         self._add_event_handler("double_tap", handler)
+#         self._set_attr("onDoubleTap", True if handler is not None else None)
 
-    # on_long_press
-    @property
-    def on_long_press(self) -> OptionalControlEventCallable:
-        return self._get_event_handler("long_press")
+#     # on_long_press
+#     @property
+#     def on_long_press(self) -> OptionalControlEventCallable:
+#         return self._get_event_handler("long_press")
 
-    @on_long_press.setter
-    def on_long_press(self, handler: OptionalControlEventCallable):
-        self._add_event_handler("long_press", handler)
-        self._set_attr("onLongPress", True if handler is not None else None)
+#     @on_long_press.setter
+#     def on_long_press(self, handler: OptionalControlEventCallable):
+#         self._add_event_handler("long_press", handler)
+#         self._set_attr("onLongPress", True if handler is not None else None)
 
-    # on_tap
-    @property
-    def on_tap(self) -> OptionalControlEventCallable:
-        return self._get_event_handler("tap")
+#     # on_tap
+#     @property
+#     def on_tap(self) -> OptionalControlEventCallable:
+#         return self._get_event_handler("tap")
 
-    @on_tap.setter
-    def on_tap(self, handler: OptionalControlEventCallable):
-        self._add_event_handler("tap", handler)
-        self._set_attr("onTap", True if handler is not None else None)
+#     @on_tap.setter
+#     def on_tap(self, handler: OptionalControlEventCallable):
+#         self._add_event_handler("tap", handler)
+#         self._set_attr("onTap", True if handler is not None else None)
 
-    # on_tap_cancel
-    @property
-    def on_tap_cancel(self) -> OptionalControlEventCallable:
-        return self._get_event_handler("tap_cancel")
+#     # on_tap_cancel
+#     @property
+#     def on_tap_cancel(self) -> OptionalControlEventCallable:
+#         return self._get_event_handler("tap_cancel")
 
-    @on_tap_cancel.setter
-    def on_tap_cancel(self, handler: OptionalControlEventCallable):
-        self._add_event_handler("tap_cancel", handler)
-        self._set_attr("onTapCancel", True if handler is not None else None)
+#     @on_tap_cancel.setter
+#     def on_tap_cancel(self, handler: OptionalControlEventCallable):
+#         self._add_event_handler("tap_cancel", handler)
+#         self._set_attr("onTapCancel", True if handler is not None else None)
 
-    # on_tap_down
-    @property
-    def on_tap_down(self) -> OptionalEventCallable[TapEvent]:
-        return self.__on_tap_down.handler
+#     # on_tap_down
+#     @property
+#     def on_tap_down(self) -> OptionalEventCallable[TapEvent]:
+#         return self.__on_tap_down.handler
 
-    @on_tap_down.setter
-    def on_tap_down(self, handler: OptionalEventCallable[TapEvent]):
-        self.__on_tap_down.handler = handler
-        self._set_attr("onTapDown", True if handler is not None else None)
+#     @on_tap_down.setter
+#     def on_tap_down(self, handler: OptionalEventCallable[TapEvent]):
+#         self.__on_tap_down.handler = handler
+#         self._set_attr("onTapDown", True if handler is not None else None)
 
 
 class DataRow2(Control):
