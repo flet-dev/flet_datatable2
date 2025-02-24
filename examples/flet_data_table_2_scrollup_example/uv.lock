@@ -245,7 +245,7 @@ wheels = [
 [[package]]
 name = "flet-data-table-2"
 version = "0.1.0"
-source = { directory = "../../" }
+source = { editable = "../../" }
 dependencies = [
     { name = "flet" },
 ]
@@ -273,7 +273,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "flet", specifier = ">=0.26.0" },
-    { name = "flet-data-table-2", directory = "../../" },
+    { name = "flet-data-table-2", editable = "../../" },
 ]
 
 [package.metadata.requires-dev]

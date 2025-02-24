@@ -8,7 +8,7 @@ authors = [
     { name = "Flet developer", email = "you@example.com" }
 ]
 dependencies = [
-  "flet-data-table-2 @ file:///Users/inesa/projects/flet-dev/flet_data_table2",
+  "flet-data-table-2",
   "flet>=0.26.0",
 ]
 
@@ -34,6 +34,9 @@ path = "src"
 dev-dependencies = [
     "flet[all]==0.26.0",
 ]
+
+[tool.uv.sources]
+flet-data-table-2 = { path = "../../", editable = true }
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.26.0"}
