@@ -140,6 +140,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           columnSpacing: widget.control.attrDouble("columnSpacing"),
           dataRowColor: parseWidgetStateColor(
               Theme.of(context), widget.control, "dataRowColor"),
+          dataRowHeight: widget.control.attrDouble("dataRowHeight"),
           //dataRowMinHeight: widget.control.attrDouble("dataRowMinHeight"),
           //dataRowMaxHeight: widget.control.attrDouble("dataRowMaxHeight"),
           dataTextStyle: parseTextStyle(

@@ -270,8 +270,9 @@ class FletDataTable2(ConstrainedControl):
         checkbox_alignment: Optional[Alignment] = None,
         column_spacing: OptionalNumber = None,
         data_row_color: ControlStateValue[ColorValue] = None,
-        data_row_min_height: OptionalNumber = None,
-        data_row_max_height: OptionalNumber = None,
+        data_row_height: OptionalNumber = None,
+        # data_row_min_height: OptionalNumber = None,
+        # data_row_max_height: OptionalNumber = None,
         data_text_style: Optional[TextStyle] = None,
         bgcolor: Optional[ColorValue] = None,
         gradient: Optional[Gradient] = None,
@@ -370,8 +371,9 @@ class FletDataTable2(ConstrainedControl):
         self.data_row_checkbox_theme = data_row_checkbox_theme
         self.column_spacing = column_spacing
         self.data_row_color = data_row_color
-        self.data_row_min_height = data_row_min_height
-        self.data_row_max_height = data_row_max_height
+        # self.data_row_min_height = data_row_min_height
+        # self.data_row_max_height = data_row_max_height
+        self.data_row_height = data_row_height
         self.data_text_style = data_text_style
         self.heading_row_color = heading_row_color
         self.heading_row_height = heading_row_height
@@ -404,11 +406,11 @@ class FletDataTable2(ConstrainedControl):
             len(list(filter(lambda c: c.visible, row.cells))) == len(visible_columns)
             for row in visible_rows
         ), f"each visible DataRow must contain exactly as many visible DataCells as there are visible DataColumns ({len(visible_columns)})"
-        assert (
-            self.data_row_min_height is None
-            or self.data_row_max_height is None
-            or (self.data_row_min_height <= self.data_row_max_height)
-        ), "data_row_min_height must be less than or equal to data_row_max_height"
+        # assert (
+        #     self.data_row_min_height is None
+        #     or self.data_row_max_height is None
+        #     or (self.data_row_min_height <= self.data_row_max_height)
+        # ), "data_row_min_height must be less than or equal to data_row_max_height"
         assert (
             self.divider_thickness is None or self.divider_thickness >= 0
         ), "divider_thickness must be greater than or equal to 0"
@@ -673,23 +675,32 @@ class FletDataTable2(ConstrainedControl):
     def data_row_color(self, value: ControlStateValue[str]):
         self.__data_row_color = value
 
-    # data_row_min_height
+    # data_row_height
     @property
-    def data_row_min_height(self) -> OptionalNumber:
-        return self._get_attr("dataRowMinHeight")
+    def data_row_height(self) -> OptionalNumber:
+        return self._get_attr("dataRowHeight")
 
-    @data_row_min_height.setter
-    def data_row_min_height(self, value: OptionalNumber):
-        self._set_attr("dataRowMinHeight", value)
+    @data_row_height.setter
+    def data_row_height(self, value: OptionalNumber):
+        self._set_attr("dataRowHeight", value)
 
-    # data_row_max_height
-    @property
-    def data_row_max_height(self) -> OptionalNumber:
-        return self._get_attr("dataRowMaxHeight")
+    # # data_row_min_height
+    # @property
+    # def data_row_min_height(self) -> OptionalNumber:
+    #     return self._get_attr("dataRowMinHeight")
 
-    @data_row_max_height.setter
-    def data_row_max_height(self, value: OptionalNumber):
-        self._set_attr("dataRowMaxHeight", value)
+    # @data_row_min_height.setter
+    # def data_row_min_height(self, value: OptionalNumber):
+    #     self._set_attr("dataRowMinHeight", value)
+
+    # # data_row_max_height
+    # @property
+    # def data_row_max_height(self) -> OptionalNumber:
+    #     return self._get_attr("dataRowMaxHeight")
+
+    # @data_row_max_height.setter
+    # def data_row_max_height(self, value: OptionalNumber):
+    #     self._set_attr("dataRowMaxHeight", value)
 
     # data_text_style
     @property

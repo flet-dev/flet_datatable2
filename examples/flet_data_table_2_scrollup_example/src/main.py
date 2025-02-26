@@ -73,6 +73,7 @@ def main(page: ft.Page):
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),
+            data_row_color=ft.Colors.PURPLE_100,
         ),
     )
 
