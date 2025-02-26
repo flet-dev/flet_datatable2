@@ -239,6 +239,7 @@ class FletDataTable2(ConstrainedControl):
         self,
         columns: List[DataColumn2],
         rows: Optional[List[DataRow2]] = None,
+        empty: Optional[Control] = None,
         bottom_margin: OptionalNumber = None,
         lm_ratio: OptionalNumber = None,
         sm_ratio: OptionalNumber = None,
@@ -336,6 +337,7 @@ class FletDataTable2(ConstrainedControl):
 
         self.columns = columns
         self.rows = rows
+        self.empty = empty
         self.fixed_left_columns = fixed_left_columns
         self.fixed_top_rows = fixed_top_rows
         self.fixed_columns_color = fixed_columns_color
@@ -407,7 +409,21 @@ class FletDataTable2(ConstrainedControl):
         self._set_attr_json("headingTextStyle", self.__heading_text_style)
 
     def _get_children(self):
-        return self.__columns + self.__rows
+        children = self.__columns + self.__rows
+
+        if isinstance(self.__empty, Control):
+            self.__empty._set_attr_internal("n", "empty")
+            children.append(self.__empty)
+        return children
+
+    # empty
+    @property
+    def empty(self) -> Control:
+        return self.__empty
+
+    @empty.setter
+    def empty(self, value: Control):
+        self.__empty = value
 
     # columns
     @property

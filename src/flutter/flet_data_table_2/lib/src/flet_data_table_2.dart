@@ -55,6 +55,12 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
     var datatable =
         withControls(widget.children.where((c) => c.isVisible).map((c) => c.id),
             (content, viewModel) {
+      var emptyCtrls =
+          widget.children.where((c) => c.name == "empty" && c.isVisible);
+      Widget? empty = emptyCtrls.isNotEmpty
+          ? createControl(
+              widget.control, emptyCtrls.first.id, widget.control.isDisabled)
+          : null;
       var bgColor = widget.control.attrString("bgColor");
       var border = parseBorder(Theme.of(context), widget.control, "border");
       var borderRadius = parseBorderRadius(widget.control, "borderRadius");
@@ -96,6 +102,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           //scrollController: _controller,
           decoration: decoration,
           border: tableBorder,
+          empty: empty,
           fixedLeftColumns: widget.control.attrInt("fixedLeftColumns") ?? 0,
           fixedTopRows: widget.control.attrInt("fixedTopRows") ?? 0,
           fixedColumnsColor:

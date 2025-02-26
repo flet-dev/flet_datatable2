@@ -65,7 +65,7 @@ def main(page: ft.Page):
             fixed_corner_color=ft.Colors.GREEN,
             fixed_columns_color=ft.Colors.YELLOW,
             heading_row_color=ft.Colors.BLUE,
-            fixed_left_columns=2,
+            fixed_left_columns=3,
             fixed_top_rows=2,
             show_checkbox_column=True,
             expand=True,
@@ -75,6 +75,7 @@ def main(page: ft.Page):
             bottom_margin=100,
             min_width=600,
             columns=get_data_columns(),
+            empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),
         ),
     )
