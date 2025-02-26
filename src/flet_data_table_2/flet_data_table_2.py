@@ -32,9 +32,9 @@ from flet.core.types import (
 
 
 class Size(Enum):
-    S = "small"
-    M = "medium"
-    L = "large"
+    S = "s"
+    M = "m"
+    L = "l"
 
 
 class DataColumnSortEvent(ControlEvent):
@@ -142,128 +142,6 @@ class DataColumn2(Control):
         self.__on_sort.handler = handler
         self._set_attr("onSort", True if handler is not None else None)
 
-
-# class DataCell(Control):
-#     def __init__(
-#         self,
-#         content: Control,
-#         placeholder: Optional[bool] = None,
-#         show_edit_icon: Optional[bool] = None,
-#         on_tap: OptionalControlEventCallable = None,
-#         on_double_tap: OptionalControlEventCallable = None,
-#         on_long_press: OptionalControlEventCallable = None,
-#         on_tap_cancel: OptionalControlEventCallable = None,
-#         on_tap_down: OptionalEventCallable[TapEvent] = None,
-#         #
-#         # Control
-#         #
-#         ref=None,
-#         visible: Optional[bool] = None,
-#         disabled: Optional[bool] = None,
-#         data: Any = None,
-#     ):
-#         Control.__init__(self, ref=ref, visible=visible, disabled=disabled, data=data)
-
-#         self.__on_tap_down = EventHandler(lambda e: TapEvent(e))
-#         self._add_event_handler("tap_down", self.__on_tap_down.get_handler())
-
-#         self.content = content
-#         self.on_double_tap = on_double_tap
-#         self.on_long_press = on_long_press
-#         self.on_tap = on_tap
-#         self.on_tap_cancel = on_tap_cancel
-#         self.on_tap_down = on_tap_down
-#         self.placeholder = placeholder
-#         self.show_edit_icon = show_edit_icon
-
-#     def _get_control_name(self):
-#         return "datacell"
-
-#     def _get_children(self):
-#         return [self.__content]
-
-#     def before_update(self):
-#         super().before_update()
-#         assert self.__content.visible, "content must be visible"
-
-#     # content
-#     @property
-#     def content(self) -> Control:
-#         return self.__content
-
-#     @content.setter
-#     def content(self, value: Control):
-#         self.__content = value
-
-#     # placeholder
-#     @property
-#     def placeholder(self) -> bool:
-#         return self._get_attr("placeholder", data_type="bool", def_value=False)
-
-#     @placeholder.setter
-#     def placeholder(self, value: Optional[bool]):
-#         self._set_attr("placeholder", value)
-
-#     # show_edit_icon
-#     @property
-#     def show_edit_icon(self) -> bool:
-#         return self._get_attr("showEditIcon", data_type="bool", def_value=False)
-
-#     @show_edit_icon.setter
-#     def show_edit_icon(self, value: Optional[bool]):
-#         self._set_attr("showEditIcon", value)
-
-#     # on_double_tap
-#     @property
-#     def on_double_tap(self) -> OptionalControlEventCallable:
-#         return self._get_event_handler("double_tap")
-
-#     @on_double_tap.setter
-#     def on_double_tap(self, handler: OptionalControlEventCallable):
-#         self._add_event_handler("double_tap", handler)
-#         self._set_attr("onDoubleTap", True if handler is not None else None)
-
-#     # on_long_press
-#     @property
-#     def on_long_press(self) -> OptionalControlEventCallable:
-#         return self._get_event_handler("long_press")
-
-#     @on_long_press.setter
-#     def on_long_press(self, handler: OptionalControlEventCallable):
-#         self._add_event_handler("long_press", handler)
-#         self._set_attr("onLongPress", True if handler is not None else None)
-
-#     # on_tap
-#     @property
-#     def on_tap(self) -> OptionalControlEventCallable:
-#         return self._get_event_handler("tap")
-
-#     @on_tap.setter
-#     def on_tap(self, handler: OptionalControlEventCallable):
-#         self._add_event_handler("tap", handler)
-#         self._set_attr("onTap", True if handler is not None else None)
-
-#     # on_tap_cancel
-#     @property
-#     def on_tap_cancel(self) -> OptionalControlEventCallable:
-#         return self._get_event_handler("tap_cancel")
-
-#     @on_tap_cancel.setter
-#     def on_tap_cancel(self, handler: OptionalControlEventCallable):
-#         self._add_event_handler("tap_cancel", handler)
-#         self._set_attr("onTapCancel", True if handler is not None else None)
-
-#     # on_tap_down
-#     @property
-#     def on_tap_down(self) -> OptionalEventCallable[TapEvent]:
-#         return self.__on_tap_down.handler
-
-#     @on_tap_down.setter
-#     def on_tap_down(self, handler: OptionalEventCallable[TapEvent]):
-#         self.__on_tap_down.handler = handler
-#         self._set_attr("onTapDown", True if handler is not None else None)
-
-
 class DataRow2(Control):
     def __init__(
         self,
@@ -361,6 +239,8 @@ class FletDataTable2(ConstrainedControl):
         columns: List[DataColumn2],
         rows: Optional[List[DataRow2]] = None,
         bottom_margin: OptionalNumber = None,
+        lm_ratio: OptionalNumber = None,
+        sm_ratio: OptionalNumber = None,
         min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
@@ -452,6 +332,8 @@ class FletDataTable2(ConstrainedControl):
         self.columns = columns
         self.rows = rows
         self.bottom_margin = bottom_margin
+        self.lm_ration = lm_ratio
+        self.sm_ratio = sm_ratio
         self.min_width = min_width
         self.border = border
         self.border_radius = border_radius
@@ -550,6 +432,24 @@ class FletDataTable2(ConstrainedControl):
     @bottom_margin.setter
     def bottom_margin(self, value: OptionalNumber):
         self._set_attr("bottomMargin", value)
+    
+    # lm_ratio
+    @property
+    def lm_ratio(self) -> OptionalNumber:
+        return self._get_attr("lmRatio")
+
+    @lm_ratio.setter
+    def lm_ratio(self, value: OptionalNumber):
+        self._set_attr("lmRatio", value)
+    
+    # sm_ratio
+    @property
+    def sm_ratio(self) -> OptionalNumber:
+        return self._get_attr("smRatio")
+
+    @sm_ratio.setter
+    def sm_ratio(self, value: OptionalNumber):
+        self._set_attr("smRatio", value)
 
     # min_width
     @property

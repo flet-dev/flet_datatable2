@@ -1,15 +1,10 @@
 import 'dart:convert';
-import 'dart:convert';
-import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flet/flet.dart' as ft;
 import 'package:flet/flet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class FletDataTable2Control extends StatefulWidget {
   final Control? parent;
@@ -101,6 +96,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           //scrollController: _controller,
           decoration: decoration,
           border: tableBorder,
+          smRatio: widget.control.attrDouble("smRatio") ?? 0.67,
+          lmRatio: widget.control.attrDouble("lmRatio") ?? 1.2,
           clipBehavior: clipBehavior,
           checkboxHorizontalMargin:
               widget.control.attrDouble("checkboxHorizontalMargin"),
@@ -139,7 +136,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                 column.children.where((c) => c.name == "label" && c.isVisible);
             return DataColumn2(
                 //size: ColumnSize.S,
-                size: parseSize(column.control.attrString("size"), ColumnSize.S)!,
+                size:
+                    parseSize(column.control.attrString("size"), ColumnSize.S)!,
                 numeric: column.control.attrBool("numeric", false)!,
                 tooltip: column.control.attrString("tooltip"),
                 headingRowAlignment: parseMainAxisAlignment(
