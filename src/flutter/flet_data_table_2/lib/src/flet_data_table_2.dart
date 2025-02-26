@@ -114,6 +114,12 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           clipBehavior: clipBehavior,
           checkboxHorizontalMargin:
               widget.control.attrDouble("checkboxHorizontalMargin"),
+          headingCheckboxTheme: parseCheckboxTheme(
+              Theme.of(context),
+              widget.control.attrString("headingCheckboxTheme") != null
+                  ? json.decode(
+                      widget.control.attrString("headingCheckboxTheme")!)
+                  : null),
           columnSpacing: widget.control.attrDouble("columnSpacing"),
           dataRowColor: parseWidgetStateColor(
               Theme.of(context), widget.control, "dataRowColor"),

@@ -14,6 +14,7 @@ from flet.core.gesture_detector import TapEvent
 from flet.core.gradients import Gradient
 from flet.core.ref import Ref
 from flet.core.text_style import TextStyle
+from flet.core.theme import CheckboxTheme
 from flet.core.tooltip import TooltipValue
 from flet.core.types import (
     BorderRadiusValue,
@@ -250,6 +251,7 @@ class FletDataTable2(ConstrainedControl):
         min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
+        heading_checkbox_theme: Optional[CheckboxTheme] = None,
         sort_column_index: Optional[int] = None,
         show_bottom_border: Optional[bool] = None,
         border: Optional[Border] = None,
@@ -354,6 +356,7 @@ class FletDataTable2(ConstrainedControl):
         self.gradient = gradient
         self.divider_thickness = divider_thickness
         self.checkbox_horizontal_margin = checkbox_horizontal_margin
+        self.heading_checkbox_theme = heading_checkbox_theme
         self.column_spacing = column_spacing
         self.data_row_color = data_row_color
         self.data_row_min_height = data_row_min_height
@@ -407,6 +410,7 @@ class FletDataTable2(ConstrainedControl):
         self._set_attr_json("headingRowColor", self.__heading_row_color)
         self._set_attr_json("dataTextStyle", self.__data_text_style)
         self._set_attr_json("headingTextStyle", self.__heading_text_style)
+        self._set_attr_json("headingCheckboxTheme", self.__heading_checkbox_theme)
 
     def _get_children(self):
         children = self.__columns + self.__rows
@@ -567,6 +571,15 @@ class FletDataTable2(ConstrainedControl):
     @checkbox_horizontal_margin.setter
     def checkbox_horizontal_margin(self, value: OptionalNumber):
         self._set_attr("checkboxHorizontalMargin", value)
+
+    # heading_checkbox_theme
+    @property
+    def heading_checkbox_theme(self) -> Optional[CheckboxTheme]:
+        return self.__heading_checkbox_theme
+
+    @heading_checkbox_theme.setter
+    def heading_checkbox_theme(self, value: Optional[CheckboxTheme]):
+        self.__heading_checkbox_theme = value
 
     # column_spacing
     @property
