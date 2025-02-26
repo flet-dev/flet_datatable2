@@ -2,6 +2,7 @@ import json
 from enum import Enum
 from typing import Any, List, Optional, Union
 
+from flet.core.alignment import Alignment
 from flet.core.animation import AnimationValue
 from flet.core.badge import BadgeValue
 from flet.core.border import Border, BorderSide
@@ -265,6 +266,7 @@ class FletDataTable2(ConstrainedControl):
         horizontal_lines: Optional[BorderSide] = None,
         vertical_lines: Optional[BorderSide] = None,
         checkbox_horizontal_margin: OptionalNumber = None,
+        checkbox_alignment: Optional[Alignment] = None,
         column_spacing: OptionalNumber = None,
         data_row_color: ControlStateValue[ColorValue] = None,
         data_row_min_height: OptionalNumber = None,
@@ -362,6 +364,7 @@ class FletDataTable2(ConstrainedControl):
         self.gradient = gradient
         self.divider_thickness = divider_thickness
         self.checkbox_horizontal_margin = checkbox_horizontal_margin
+        self.checkbox_alignment = checkbox_alignment
         self.heading_checkbox_theme = heading_checkbox_theme
         self.column_spacing = column_spacing
         self.data_row_color = data_row_color
@@ -423,6 +426,7 @@ class FletDataTable2(ConstrainedControl):
         self._set_attr_json(
             "sortArrowAnimationDuration", self.__sort_arrow_animation_duration
         )
+        self._set_attr_json("checkboxAlignment", self.__checkbox_alignment)
 
     def _get_children(self):
         children = self.__columns + self.__rows
@@ -602,6 +606,15 @@ class FletDataTable2(ConstrainedControl):
     @checkbox_horizontal_margin.setter
     def checkbox_horizontal_margin(self, value: OptionalNumber):
         self._set_attr("checkboxHorizontalMargin", value)
+
+    # checkbox_alignment
+    @property
+    def checkbox_alignment(self) -> Optional[Alignment]:
+        return self.__checkbox_alignment
+
+    @checkbox_alignment.setter
+    def checkbox_alignment(self, value: Optional[Alignment]):
+        self.__checkbox_alignment = value
 
     # heading_checkbox_theme
     @property

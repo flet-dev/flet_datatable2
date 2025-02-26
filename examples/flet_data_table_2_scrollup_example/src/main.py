@@ -1,4 +1,5 @@
 import logging
+import math
 
 import flet as ft
 from data import desserts
@@ -71,6 +72,16 @@ def main(page: ft.Page):
             min_width=600,
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
+            border=ft.border.all(10),
+            border_radius=20,
+            gradient=ft.SweepGradient(
+                center=ft.alignment.center,
+                start_angle=0.0,
+                end_angle=math.pi * 2,
+                colors=[ft.Colors.YELLOW, ft.Colors.BLUE],
+            ),
+            bgcolor=ft.Colors.PINK,
+            checkbox_alignment=ft.alignment.top_left,
             rows=get_data_rows(desserts),
         ),
     )

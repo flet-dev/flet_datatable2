@@ -74,6 +74,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           parseBorderSide(Theme.of(context), widget.control, "verticalLines");
       var defaultDecoration =
           Theme.of(context).dataTableTheme.decoration ?? const BoxDecoration();
+      var checkboxAlignment = parseAlignment(
+          widget.control, "checkboxAlignment", Alignment.center)!;
 
       BoxDecoration? decoration;
       if (bgColor != null ||
@@ -120,6 +122,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                   Duration(microseconds: 150),
           checkboxHorizontalMargin:
               widget.control.attrDouble("checkboxHorizontalMargin"),
+          checkboxAlignment: checkboxAlignment,
           headingCheckboxTheme: parseCheckboxTheme(
               Theme.of(context),
               widget.control.attrString("headingCheckboxTheme") != null
