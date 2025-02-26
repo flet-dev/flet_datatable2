@@ -29,12 +29,8 @@ def main(page: ft.Page):
 
     def get_data_columns():
         data_columns = [
-            DataColumn2(
-                label=ft.Text("Name"),
-                on_sort=sort_column,
-                size=Size.L
-            ),
-            DataColumn2(ft.Text("Calories"), on_sort=sort_column, numeric=True, size=Size.M),
+            DataColumn2(label=ft.Text("Name"), on_sort=sort_column),
+            DataColumn2(ft.Text("Calories"), on_sort=sort_column, numeric=True),
             DataColumn2(ft.Text("Fat"), on_sort=sort_column, numeric=True),
             DataColumn2(ft.Text("Carbs"), on_sort=sort_column, numeric=True),
             DataColumn2(ft.Text("Protein"), on_sort=sort_column, numeric=True),

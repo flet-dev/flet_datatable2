@@ -96,6 +96,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           //scrollController: _controller,
           decoration: decoration,
           border: tableBorder,
+          fixedLeftColumns: widget.control.attrInt("fixedLeftColumns") ?? 0,
+          fixedTopRows: widget.control.attrInt("fixedTopRows") ?? 0,
           smRatio: widget.control.attrDouble("smRatio") ?? 0.67,
           lmRatio: widget.control.attrDouble("lmRatio") ?? 1.2,
           clipBehavior: clipBehavior,

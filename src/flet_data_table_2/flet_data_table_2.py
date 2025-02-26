@@ -142,6 +142,7 @@ class DataColumn2(Control):
         self.__on_sort.handler = handler
         self._set_attr("onSort", True if handler is not None else None)
 
+
 class DataRow2(Control):
     def __init__(
         self,
@@ -241,6 +242,8 @@ class FletDataTable2(ConstrainedControl):
         bottom_margin: OptionalNumber = None,
         lm_ratio: OptionalNumber = None,
         sm_ratio: OptionalNumber = None,
+        fixed_left_columns: Optional[int] = None,
+        fixed_top_rows: Optional[int] = None,
         min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
@@ -331,6 +334,8 @@ class FletDataTable2(ConstrainedControl):
 
         self.columns = columns
         self.rows = rows
+        self.fixed_left_columns = fixed_left_columns
+        self.fixed_top_rows = fixed_top_rows
         self.bottom_margin = bottom_margin
         self.lm_ration = lm_ratio
         self.sm_ratio = sm_ratio
@@ -424,6 +429,24 @@ class FletDataTable2(ConstrainedControl):
             isinstance(row, DataRow2) for row in self.__rows
         ), "rows must contain only DataRow instances"
 
+    # fixed_left_columns
+    @property
+    def fixed_left_columns(self) -> Optional[int]:
+        return self._get_attr("fixedLeftColumns")
+
+    @fixed_left_columns.setter
+    def fixed_left_columns(self, value: Optional[int]):
+        self._set_attr("fixedLeftColumns", value)
+
+    # fixed_top_rows
+    @property
+    def fixed_top_rows(self) -> Optional[int]:
+        return self._get_attr("fixedTopRows")
+
+    @fixed_top_rows.setter
+    def fixed_top_rows(self, value: Optional[int]):
+        self._set_attr("fixedTopRows", value)
+
     # bottom_margin
     @property
     def bottom_margin(self) -> OptionalNumber:
@@ -432,7 +455,7 @@ class FletDataTable2(ConstrainedControl):
     @bottom_margin.setter
     def bottom_margin(self, value: OptionalNumber):
         self._set_attr("bottomMargin", value)
-    
+
     # lm_ratio
     @property
     def lm_ratio(self) -> OptionalNumber:
@@ -441,7 +464,7 @@ class FletDataTable2(ConstrainedControl):
     @lm_ratio.setter
     def lm_ratio(self, value: OptionalNumber):
         self._set_attr("lmRatio", value)
-    
+
     # sm_ratio
     @property
     def sm_ratio(self) -> OptionalNumber:
