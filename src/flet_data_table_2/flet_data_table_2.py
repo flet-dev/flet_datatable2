@@ -263,6 +263,8 @@ class FletDataTable2(ConstrainedControl):
         sort_arrow_icon: Optional[IconValue] = None,
         sort_arrow_animation_duration: Optional[DurationValue] = None,
         show_bottom_border: Optional[bool] = None,
+        is_horizontal_scroll_bar_visible: Optional[bool] = None,
+        is_vertical_scroll_bar_visible: Optional[bool] = None,
         border: Optional[Border] = None,
         border_radius: Optional[BorderRadiusValue] = None,
         horizontal_lines: Optional[BorderSide] = None,
@@ -363,6 +365,8 @@ class FletDataTable2(ConstrainedControl):
         self.border = border
         self.border_radius = border_radius
         self.horizontal_lines = horizontal_lines
+        self.is_horizontal_scroll_bar_visible = is_horizontal_scroll_bar_visible
+        self.is_vertical_scroll_bar_visible = is_vertical_scroll_bar_visible
         self.vertical_lines = vertical_lines
         self.bgcolor = bgcolor
         self.gradient = gradient
@@ -697,24 +701,6 @@ class FletDataTable2(ConstrainedControl):
     def data_row_height(self, value: OptionalNumber):
         self._set_attr("dataRowHeight", value)
 
-    # # data_row_min_height
-    # @property
-    # def data_row_min_height(self) -> OptionalNumber:
-    #     return self._get_attr("dataRowMinHeight")
-
-    # @data_row_min_height.setter
-    # def data_row_min_height(self, value: OptionalNumber):
-    #     self._set_attr("dataRowMinHeight", value)
-
-    # # data_row_max_height
-    # @property
-    # def data_row_max_height(self) -> OptionalNumber:
-    #     return self._get_attr("dataRowMaxHeight")
-
-    # @data_row_max_height.setter
-    # def data_row_max_height(self, value: OptionalNumber):
-    #     self._set_attr("dataRowMaxHeight", value)
-
     # data_text_style
     @property
     def data_text_style(self) -> Optional[TextStyle]:
@@ -805,6 +791,26 @@ class FletDataTable2(ConstrainedControl):
     @sort_ascending.setter
     def sort_ascending(self, value: Optional[bool]):
         self._set_attr("sortAscending", value)
+
+    # is_horizontal_scroll_bar_visible
+    @property
+    def is_horizontal_scroll_bar_visible(self) -> bool:
+        return self._get_attr("isHorizontalScrollBarVisible", data_type="bool")
+
+    @is_horizontal_scroll_bar_visible.setter
+    def is_horizontal_scroll_bar_visible(self, value: Optional[bool]):
+        self._set_attr("isHorizontalScrollBarVisible", value)
+
+    # is_vertical_scroll_bar_visible
+    @property
+    def is_vertical_scroll_bar_visible(self) -> bool:
+        return self._get_attr(
+            "isVerticalScrollBarVisible", data_type="bool", def_value=False
+        )
+
+    @is_vertical_scroll_bar_visible.setter
+    def is_vertical_scroll_bar_visible(self, value: Optional[bool]):
+        self._set_attr("isVerticalScrollBarVisible", value)
 
     # sort_column_index
     @property

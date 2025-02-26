@@ -108,6 +108,10 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
             decoration: decoration,
             border: tableBorder,
             empty: empty,
+            isHorizontalScrollBarVisible:
+                widget.control.attrBool("isHorizontalScrollBarVisible"),
+            isVerticalScrollBarVisible:
+                widget.control.attrBool("isVerticalScrollBarVisible"),
             fixedLeftColumns: widget.control.attrInt("fixedLeftColumns") ?? 0,
             fixedTopRows: widget.control.attrInt("fixedTopRows") ?? 0,
             fixedColumnsColor:
@@ -196,8 +200,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                       column.control.isDisabled || tableDisabled));
             }).toList(),
             rows: viewModel.controlViews
-                .where(
-                    (c) => c.control.type == "datarow2" && c.control.isVisible)
+                .where((c) => c.control.type == "datarow2" && c.control.isVisible)
                 .map((row) {
               return DataRow2(
                   key: ValueKey(row.control.id),

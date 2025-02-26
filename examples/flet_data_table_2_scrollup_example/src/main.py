@@ -30,8 +30,17 @@ def main(page: ft.Page):
 
     def get_data_columns():
         data_columns = [
-            DataColumn2(label=ft.Text("Name"), on_sort=sort_column),
-            DataColumn2(ft.Text("Calories"), on_sort=sort_column, numeric=True),
+            DataColumn2(
+                label=ft.Text("Name"),
+                on_sort=sort_column,
+                heading_row_alignment=ft.MainAxisAlignment.START,
+            ),
+            DataColumn2(
+                ft.Text("Calories"),
+                on_sort=sort_column,
+                numeric=True,
+                heading_row_alignment=ft.MainAxisAlignment.END,
+            ),
             DataColumn2(ft.Text("Fat"), on_sort=sort_column, numeric=True),
             DataColumn2(ft.Text("Carbs"), on_sort=sort_column, numeric=True),
             DataColumn2(ft.Text("Protein"), on_sort=sort_column, numeric=True),
@@ -73,6 +82,8 @@ def main(page: ft.Page):
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),
+            is_vertical_scroll_bar_visible=False,
+            is_horizontal_scroll_bar_visible=False,
         ),
     )
 
