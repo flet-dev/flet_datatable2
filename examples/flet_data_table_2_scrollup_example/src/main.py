@@ -69,7 +69,6 @@ def main(page: ft.Page):
             sort_ascending=True,
             bottom_margin=10,
             min_width=600,
-            sort_arrow_icon=ft.Icons.ACCESS_ALARM,
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),

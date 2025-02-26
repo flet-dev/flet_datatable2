@@ -22,6 +22,7 @@ from flet.core.types import (
     ColorEnums,
     ColorValue,
     ControlStateValue,
+    DurationValue,
     IconEnums,
     IconValue,
     MainAxisAlignment,
@@ -257,6 +258,7 @@ class FletDataTable2(ConstrainedControl):
         heading_checkbox_theme: Optional[CheckboxTheme] = None,
         sort_column_index: Optional[int] = None,
         sort_arrow_icon: Optional[IconValue] = None,
+        sort_arrow_animation_duration: Optional[DurationValue] = None,
         show_bottom_border: Optional[bool] = None,
         border: Optional[Border] = None,
         border_radius: Optional[BorderRadiusValue] = None,
@@ -378,6 +380,7 @@ class FletDataTable2(ConstrainedControl):
         self.on_select_all = on_select_all
         self.clip_behavior = clip_behavior
         self.sort_arrow_icon = sort_arrow_icon
+        self.sort_arrow_animation_duration = sort_arrow_animation_duration
 
     def _get_control_name(self):
         return "fletdatatable2"
@@ -417,6 +420,9 @@ class FletDataTable2(ConstrainedControl):
         self._set_attr_json("dataTextStyle", self.__data_text_style)
         self._set_attr_json("headingTextStyle", self.__heading_text_style)
         self._set_attr_json("headingCheckboxTheme", self.__heading_checkbox_theme)
+        self._set_attr_json(
+            "sortArrowAnimationDuration", self.__sort_arrow_animation_duration
+        )
 
     def _get_children(self):
         children = self.__columns + self.__rows
@@ -515,6 +521,15 @@ class FletDataTable2(ConstrainedControl):
     def sort_arrow_icon(self, value):
         self.__sort_arrow_icon = value
         self._set_enum_attr("sortArrowIcon", value, IconEnums)
+
+    # sort_arrow_animation_duration
+    @property
+    def sort_arrow_animation_duration(self) -> Optional[DurationValue]:
+        return self.__sort_arrow_animation_duration
+
+    @sort_arrow_animation_duration.setter
+    def sort_arrow_animation_duration(self, value: Optional[DurationValue]):
+        self.__sort_arrow_animation_duration = value
 
     # lm_ratio
     @property

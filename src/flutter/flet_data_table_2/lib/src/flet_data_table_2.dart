@@ -115,6 +115,9 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           lmRatio: widget.control.attrDouble("lmRatio") ?? 1.2,
           clipBehavior: clipBehavior,
           sortArrowIcon: sortArrowIcon ?? Icons.arrow_upward,
+          sortArrowAnimationDuration:
+              parseDuration(widget.control, "sortArrowAnimationDuration") ??
+                  Duration(microseconds: 150),
           checkboxHorizontalMargin:
               widget.control.attrDouble("checkboxHorizontalMargin"),
           headingCheckboxTheme: parseCheckboxTheme(
