@@ -251,6 +251,7 @@ class FletDataTable2(ConstrainedControl):
         min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
+        show_heading_checkbox: Optional[bool] = None,
         heading_checkbox_theme: Optional[CheckboxTheme] = None,
         sort_column_index: Optional[int] = None,
         show_bottom_border: Optional[bool] = None,
@@ -368,6 +369,7 @@ class FletDataTable2(ConstrainedControl):
         self.horizontal_margin = horizontal_margin
         self.show_bottom_border = show_bottom_border
         self.show_checkbox_column = show_checkbox_column
+        self.show_heading_checkbox = show_heading_checkbox
         self.sort_ascending = sort_ascending
         self.sort_column_index = sort_column_index
         self.on_select_all = on_select_all
@@ -707,6 +709,15 @@ class FletDataTable2(ConstrainedControl):
     @show_checkbox_column.setter
     def show_checkbox_column(self, value: Optional[bool]):
         self._set_attr("showCheckboxColumn", value)
+
+    # show_heading_checkbox
+    @property
+    def show_heading_checkbox(self) -> bool:
+        return self._get_attr("showHeadingCheckbox", data_type="bool", def_value=False)
+
+    @show_heading_checkbox.setter
+    def show_heading_checkbox(self, value: Optional[bool]):
+        self._set_attr("showHeadingCheckbox", value)
 
     # sort_ascending
     @property

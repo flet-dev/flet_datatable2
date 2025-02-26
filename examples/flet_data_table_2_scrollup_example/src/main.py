@@ -68,7 +68,6 @@ def main(page: ft.Page):
             fixed_left_columns=3,
             fixed_top_rows=2,
             show_checkbox_column=True,
-            heading_checkbox_theme=ft.CheckboxTheme(check_color=ft.Colors.PURPLE),
             expand=True,
             column_spacing=0,
             horizontal_margin=12,
