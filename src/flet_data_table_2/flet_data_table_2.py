@@ -6,6 +6,7 @@ from flet.core.alignment import Alignment
 from flet.core.animation import AnimationValue
 from flet.core.badge import BadgeValue
 from flet.core.border import Border, BorderSide
+from flet.core.box import BoxDecoration
 from flet.core.constrained_control import ConstrainedControl
 from flet.core.control import Control, OptionalNumber
 from flet.core.control_event import ControlEvent
@@ -280,6 +281,7 @@ class FletDataTable2(ConstrainedControl):
         heading_row_color: ControlStateValue[ColorValue] = None,
         heading_row_height: OptionalNumber = None,
         heading_text_style: Optional[TextStyle] = None,
+        heading_row_decoration: Optional[BoxDecoration] = None,
         horizontal_margin: OptionalNumber = None,
         clip_behavior: Optional[ClipBehavior] = None,
         on_select_all: OptionalControlEventCallable = None,
@@ -388,6 +390,7 @@ class FletDataTable2(ConstrainedControl):
         self.clip_behavior = clip_behavior
         self.sort_arrow_icon = sort_arrow_icon
         self.sort_arrow_animation_duration = sort_arrow_animation_duration
+        self.heading_row_decoration = heading_row_decoration
 
     def _get_control_name(self):
         return "fletdatatable2"
@@ -432,6 +435,7 @@ class FletDataTable2(ConstrainedControl):
             "sortArrowAnimationDuration", self.__sort_arrow_animation_duration
         )
         self._set_attr_json("checkboxAlignment", self.__checkbox_alignment)
+        self._set_attr_json("headingRowDecoration", self.__heading_row_decoration)
 
     def _get_children(self):
         children = self.__columns + self.__rows
@@ -665,6 +669,15 @@ class FletDataTable2(ConstrainedControl):
     @horizontal_margin.setter
     def horizontal_margin(self, value: OptionalNumber):
         self._set_attr("horizontalMargin", value)
+
+    # heading_row_decoration
+    @property
+    def heading_row_decoration(self) -> Optional[BoxDecoration]:
+        return self.__heading_row_decoration
+
+    @heading_row_decoration.setter
+    def heading_row_decoration(self, value: Optional[BoxDecoration]):
+        self.__heading_row_decoration = value
 
     # data_row_color
     @property
