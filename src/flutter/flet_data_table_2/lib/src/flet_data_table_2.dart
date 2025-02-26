@@ -129,6 +129,12 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                   ? json.decode(
                       widget.control.attrString("headingCheckboxTheme")!)
                   : null),
+          datarowCheckboxTheme: parseCheckboxTheme(
+              Theme.of(context),
+              widget.control.attrString("dataRowCheckboxTheme") != null
+                  ? json.decode(
+                      widget.control.attrString("dataRowCheckboxTheme")!)
+                  : null),
           showHeadingCheckBox:
               widget.control.attrBool("showHeadingCheckbox", true)!,
           columnSpacing: widget.control.attrDouble("columnSpacing"),

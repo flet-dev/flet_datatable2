@@ -257,6 +257,7 @@ class FletDataTable2(ConstrainedControl):
         show_checkbox_column: Optional[bool] = None,
         show_heading_checkbox: Optional[bool] = None,
         heading_checkbox_theme: Optional[CheckboxTheme] = None,
+        data_row_checkbox_theme: Optional[CheckboxTheme] = None,
         sort_column_index: Optional[int] = None,
         sort_arrow_icon: Optional[IconValue] = None,
         sort_arrow_animation_duration: Optional[DurationValue] = None,
@@ -366,6 +367,7 @@ class FletDataTable2(ConstrainedControl):
         self.checkbox_horizontal_margin = checkbox_horizontal_margin
         self.checkbox_alignment = checkbox_alignment
         self.heading_checkbox_theme = heading_checkbox_theme
+        self.data_row_checkbox_theme = data_row_checkbox_theme
         self.column_spacing = column_spacing
         self.data_row_color = data_row_color
         self.data_row_min_height = data_row_min_height
@@ -423,6 +425,7 @@ class FletDataTable2(ConstrainedControl):
         self._set_attr_json("dataTextStyle", self.__data_text_style)
         self._set_attr_json("headingTextStyle", self.__heading_text_style)
         self._set_attr_json("headingCheckboxTheme", self.__heading_checkbox_theme)
+        self._set_attr_json("dataRowCheckboxTheme", self.__data_row_checkbox_theme)
         self._set_attr_json(
             "sortArrowAnimationDuration", self.__sort_arrow_animation_duration
         )
@@ -624,6 +627,15 @@ class FletDataTable2(ConstrainedControl):
     @heading_checkbox_theme.setter
     def heading_checkbox_theme(self, value: Optional[CheckboxTheme]):
         self.__heading_checkbox_theme = value
+
+    # data_row_checkbox_theme
+    @property
+    def data_row_checkbox_theme(self) -> Optional[CheckboxTheme]:
+        return self.__data_row_checkbox_theme
+
+    @data_row_checkbox_theme.setter
+    def data_row_checkbox_theme(self, value: Optional[CheckboxTheme]):
+        self.__data_row_checkbox_theme = value
 
     # column_spacing
     @property
