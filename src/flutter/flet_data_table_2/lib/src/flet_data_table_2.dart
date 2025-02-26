@@ -61,6 +61,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           ? createControl(
               widget.control, emptyCtrls.first.id, widget.control.isDisabled)
           : null;
+      IconData? sortArrowIcon =
+          parseIcon(widget.control.attrString("sortArrowIcon"));
       var bgColor = widget.control.attrString("bgColor");
       var border = parseBorder(Theme.of(context), widget.control, "border");
       var borderRadius = parseBorderRadius(widget.control, "borderRadius");
@@ -112,6 +114,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
           smRatio: widget.control.attrDouble("smRatio") ?? 0.67,
           lmRatio: widget.control.attrDouble("lmRatio") ?? 1.2,
           clipBehavior: clipBehavior,
+          sortArrowIcon: sortArrowIcon ?? Icons.arrow_upward,
           checkboxHorizontalMargin:
               widget.control.attrDouble("checkboxHorizontalMargin"),
           headingCheckboxTheme: parseCheckboxTheme(

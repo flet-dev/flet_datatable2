@@ -22,6 +22,8 @@ from flet.core.types import (
     ColorEnums,
     ColorValue,
     ControlStateValue,
+    IconEnums,
+    IconValue,
     MainAxisAlignment,
     OffsetValue,
     OptionalControlEventCallable,
@@ -254,6 +256,7 @@ class FletDataTable2(ConstrainedControl):
         show_heading_checkbox: Optional[bool] = None,
         heading_checkbox_theme: Optional[CheckboxTheme] = None,
         sort_column_index: Optional[int] = None,
+        sort_arrow_icon: Optional[IconValue] = None,
         show_bottom_border: Optional[bool] = None,
         border: Optional[Border] = None,
         border_radius: Optional[BorderRadiusValue] = None,
@@ -374,6 +377,7 @@ class FletDataTable2(ConstrainedControl):
         self.sort_column_index = sort_column_index
         self.on_select_all = on_select_all
         self.clip_behavior = clip_behavior
+        self.sort_arrow_icon = sort_arrow_icon
 
     def _get_control_name(self):
         return "fletdatatable2"
@@ -501,6 +505,16 @@ class FletDataTable2(ConstrainedControl):
     @bottom_margin.setter
     def bottom_margin(self, value: OptionalNumber):
         self._set_attr("bottomMargin", value)
+
+    # sort_arrow_icon
+    @property
+    def sort_arrow_icon(self):
+        return self.__sort_arrow_icon
+
+    @sort_arrow_icon.setter
+    def sort_arrow_icon(self, value):
+        self.__sort_arrow_icon = value
+        self._set_enum_attr("sortArrowIcon", value, IconEnums)
 
     # lm_ratio
     @property

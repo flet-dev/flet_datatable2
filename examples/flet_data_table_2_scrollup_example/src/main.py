@@ -62,18 +62,14 @@ def main(page: ft.Page):
 
     page.add(
         dt := FletDataTable2(
-            fixed_corner_color=ft.Colors.GREEN,
-            fixed_columns_color=ft.Colors.YELLOW,
-            heading_row_color=ft.Colors.BLUE,
-            fixed_left_columns=3,
-            fixed_top_rows=2,
             show_checkbox_column=True,
             expand=True,
             column_spacing=0,
             horizontal_margin=12,
             sort_ascending=True,
-            bottom_margin=100,
+            bottom_margin=10,
             min_width=600,
+            sort_arrow_icon=ft.Icons.ACCESS_ALARM,
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),
@@ -82,8 +78,3 @@ def main(page: ft.Page):
 
 
 ft.app(main)
-
-# horizontalScrollController: _horizontalController,
-
-# bottomMargin: 10,
-# minWidth: 600,
