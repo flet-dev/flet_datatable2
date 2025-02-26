@@ -62,6 +62,11 @@ def main(page: ft.Page):
 
     page.add(
         dt := FletDataTable2(
+            fixed_corner_color=ft.Colors.GREEN,
+            fixed_columns_color=ft.Colors.YELLOW,
+            heading_row_color=ft.Colors.BLUE,
+            fixed_left_columns=2,
+            fixed_top_rows=2,
             show_checkbox_column=True,
             expand=True,
             column_spacing=0,

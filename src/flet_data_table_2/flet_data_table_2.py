@@ -244,6 +244,8 @@ class FletDataTable2(ConstrainedControl):
         sm_ratio: OptionalNumber = None,
         fixed_left_columns: Optional[int] = None,
         fixed_top_rows: Optional[int] = None,
+        fixed_columns_color: Optional[ColorValue] = None,
+        fixed_corner_color: Optional[ColorValue] = None,
         min_width: OptionalNumber = None,
         sort_ascending: Optional[bool] = None,
         show_checkbox_column: Optional[bool] = None,
@@ -336,6 +338,8 @@ class FletDataTable2(ConstrainedControl):
         self.rows = rows
         self.fixed_left_columns = fixed_left_columns
         self.fixed_top_rows = fixed_top_rows
+        self.fixed_columns_color = fixed_columns_color
+        self.fixed_corner_color = fixed_corner_color
         self.bottom_margin = bottom_margin
         self.lm_ration = lm_ratio
         self.sm_ratio = sm_ratio
@@ -446,6 +450,26 @@ class FletDataTable2(ConstrainedControl):
     @fixed_top_rows.setter
     def fixed_top_rows(self, value: Optional[int]):
         self._set_attr("fixedTopRows", value)
+
+    # fixed_columns_color
+    @property
+    def fixed_columns_color(self) -> Optional[ColorValue]:
+        return self.__fixed_columns_color
+
+    @fixed_columns_color.setter
+    def fixed_columns_color(self, value: Optional[ColorValue]):
+        self.__fixed_columns_color = value
+        self._set_enum_attr("fixedColumnsColor", value, ColorEnums)
+
+    # fixed_corner_color
+    @property
+    def fixed_corner_color(self) -> Optional[ColorValue]:
+        return self.__fixed_corner_color
+
+    @fixed_corner_color.setter
+    def fixed_corner_color(self, value: Optional[ColorValue]):
+        self.__fixed_corner_color = value
+        self._set_enum_attr("fixedCornerColor", value, ColorEnums)
 
     # bottom_margin
     @property
