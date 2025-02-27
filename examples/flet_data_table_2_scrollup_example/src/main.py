@@ -62,9 +62,10 @@ def main(page: ft.Page):
                 fixed_width=100,
             ),
             DataColumn2(
-                ft.Text("Sodium"),
+                label=ft.Text("Sodium"),
                 on_sort=sort_column,
                 numeric=True,
+                tooltip="This is tooltip",
                 fixed_width=100,
             ),
             DataColumn2(
