@@ -34,19 +34,51 @@ def main(page: ft.Page):
                 label=ft.Text("Name"),
                 on_sort=sort_column,
                 heading_row_alignment=ft.MainAxisAlignment.START,
+                fixed_width=100,
             ),
             DataColumn2(
                 ft.Text("Calories"),
                 on_sort=sort_column,
                 numeric=True,
                 heading_row_alignment=ft.MainAxisAlignment.END,
+                fixed_width=200,
             ),
-            DataColumn2(ft.Text("Fat"), on_sort=sort_column, numeric=True),
-            DataColumn2(ft.Text("Carbs"), on_sort=sort_column, numeric=True),
-            DataColumn2(ft.Text("Protein"), on_sort=sort_column, numeric=True),
-            DataColumn2(ft.Text("Sodium"), on_sort=sort_column, numeric=True),
-            DataColumn2(ft.Text("Calcium"), on_sort=sort_column, numeric=True),
-            DataColumn2(ft.Text("Iron"), on_sort=sort_column, numeric=True),
+            DataColumn2(
+                ft.Text("Fat"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=300,
+            ),
+            DataColumn2(
+                ft.Text("Carbs"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=100,
+            ),
+            DataColumn2(
+                ft.Text("Protein"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=100,
+            ),
+            DataColumn2(
+                ft.Text("Sodium"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=100,
+            ),
+            DataColumn2(
+                ft.Text("Calcium"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=100,
+            ),
+            DataColumn2(
+                ft.Text("Iron"),
+                on_sort=sort_column,
+                numeric=True,
+                fixed_width=100,
+            ),
         ]
         return data_columns
 
@@ -82,8 +114,6 @@ def main(page: ft.Page):
             columns=get_data_columns(),
             empty=ft.Text("Empty"),
             rows=get_data_rows(desserts),
-            is_vertical_scroll_bar_visible=False,
-            is_horizontal_scroll_bar_visible=False,
         ),
     )
 

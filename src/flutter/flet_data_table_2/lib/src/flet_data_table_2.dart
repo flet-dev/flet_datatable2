@@ -183,6 +183,7 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                   //size: ColumnSize.S,
                   size: parseSize(
                       column.control.attrString("size"), ColumnSize.S)!,
+                  fixedWidth: column.control.attrDouble("fixedWidth"),
                   numeric: column.control.attrBool("numeric", false)!,
                   tooltip: column.control.attrString("tooltip"),
                   headingRowAlignment: parseMainAxisAlignment(

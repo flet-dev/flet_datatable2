@@ -58,6 +58,7 @@ class DataColumn2(Control):
         size: Optional[Size] = None,
         numeric: Optional[bool] = None,
         tooltip: Optional[str] = None,
+        fixed_width: OptionalNumber = None,
         heading_row_alignment: Optional[MainAxisAlignment] = None,
         on_sort: OptionalEventCallable[DataColumnSortEvent] = None,
         #
@@ -75,6 +76,7 @@ class DataColumn2(Control):
 
         self.label = label
         self.size = size
+        self.fixed_width = fixed_width
         self.numeric = numeric
         self.tooltip = tooltip
         self.heading_row_alignment = heading_row_alignment
@@ -118,6 +120,15 @@ class DataColumn2(Control):
     @numeric.setter
     def numeric(self, value: Optional[bool]):
         self._set_attr("numeric", value)
+
+    # fixed_width
+    @property
+    def fixed_width(self) -> OptionalNumber:
+        return self._get_attr("fixedWidth")
+
+    @fixed_width.setter
+    def fixed_width(self, value: OptionalNumber):
+        self._set_attr("fixedWidth", value)
 
     # tooltip
     @property
