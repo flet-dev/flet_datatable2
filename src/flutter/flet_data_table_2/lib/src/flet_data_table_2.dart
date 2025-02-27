@@ -208,6 +208,8 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                   selected: row.control.attrBool("selected", false)!,
                   color: parseWidgetStateColor(
                       Theme.of(context), row.control, "color"),
+                  decoration: parseBoxDecoration(
+                      Theme.of(context), row.control, "decoration", pageArgs),
                   onSelectChanged:
                       row.control.attrBool("onSelectChanged", false)!
                           ? (selected) {

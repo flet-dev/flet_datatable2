@@ -165,6 +165,7 @@ class DataRow2(Control):
         self,
         cells: List[DataCell],
         color: ControlStateValue[ColorValue] = None,
+        decoration: Optional[BoxDecoration] = None,
         selected: Optional[bool] = None,
         on_long_press: OptionalControlEventCallable = None,
         on_select_changed: OptionalControlEventCallable = None,
@@ -180,6 +181,7 @@ class DataRow2(Control):
 
         self.cells = cells
         self.color = color
+        self.decoration = decoration
         self.selected = selected
         self.on_long_press = on_long_press
         self.on_select_changed = on_select_changed
@@ -196,6 +198,7 @@ class DataRow2(Control):
             cell.visible for cell in self.__cells
         ), "cells must contain at minimum one visible DataCell"
         self._set_attr_json("color", self.__color, wrap_attr_dict=True)
+        self._set_attr_json("decoration", self.__decoration)
 
     def _get_children(self):
         return self.__cells
@@ -220,6 +223,15 @@ class DataRow2(Control):
     @color.setter
     def color(self, value: ControlStateValue[str]):
         self.__color = value
+
+    # decoration
+    @property
+    def decoration(self) -> Optional[BoxDecoration]:
+        return self.__decoration
+
+    @decoration.setter
+    def decoration(self, value: Optional[BoxDecoration]):
+        self.__decoration = value
 
     # selected
     @property
