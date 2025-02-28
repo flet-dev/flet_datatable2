@@ -189,6 +189,8 @@ class DataRow2(Control):
         on_long_press: OptionalControlEventCallable = None,
         on_select_changed: OptionalControlEventCallable = None,
         on_double_tap: OptionalControlEventCallable = None,
+        on_secondary_tap: OptionalControlEventCallable = None,
+        on_secondary_tap_down: OptionalControlEventCallable = None,
         on_tap: OptionalControlEventCallable = None,
         #
         # Control
@@ -208,6 +210,8 @@ class DataRow2(Control):
         self.on_long_press = on_long_press
         self.on_select_changed = on_select_changed
         self.on_double_tap = on_double_tap
+        self.on_secondary_tap = on_secondary_tap
+        self.on_secondary_tap_down = on_secondary_tap_down
         self.on_tap = on_tap
 
     def _get_control_name(self):
@@ -304,6 +308,26 @@ class DataRow2(Control):
     def on_double_tap(self, handler: OptionalControlEventCallable):
         self._add_event_handler("double_tap", handler)
         self._set_attr("onDoubleTap", True if handler is not None else None)
+
+    # on_secondary_tap
+    @property
+    def on_secondary_tap(self) -> OptionalControlEventCallable:
+        return self._get_event_handler("secondary_tap")
+
+    @on_secondary_tap.setter
+    def on_secondary_tap(self, handler: OptionalControlEventCallable):
+        self._add_event_handler("secondary_tap", handler)
+        self._set_attr("onSecondaryTap", True if handler is not None else None)
+
+    # on_secondary_tap_down
+    @property
+    def on_secondary_tap_down(self) -> OptionalControlEventCallable:
+        return self._get_event_handler("secondary_tap_down")
+
+    @on_secondary_tap_down.setter
+    def on_secondary_tap_down(self, handler: OptionalControlEventCallable):
+        self._add_event_handler("secondary_tap_down", handler)
+        self._set_attr("onSecondaryTapDown", True if handler is not None else None)
 
     # on_select_changed
     @property

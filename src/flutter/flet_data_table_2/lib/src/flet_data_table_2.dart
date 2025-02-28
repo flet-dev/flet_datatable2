@@ -239,6 +239,19 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                               .triggerControlEvent(row.control.id, "tap");
                         }
                       : null,
+                  onSecondaryTap: row.control.attrBool("onSecondaryTap", false)!
+                      ? () {
+                          widget.backend.triggerControlEvent(
+                              row.control.id, "secondary_tap");
+                        }
+                      : null,
+                  onSecondaryTapDown:
+                      row.control.attrBool("onSecondaryTapDown", false)!
+                          ? (details) {
+                              widget.backend.triggerControlEvent(
+                                  row.control.id, "secondary_tap_down");
+                            }
+                          : null,
                   cells: row.children
                       .where((c) => c.type == "datacell" && c.isVisible)
                       .map((cell) => DataCell(
