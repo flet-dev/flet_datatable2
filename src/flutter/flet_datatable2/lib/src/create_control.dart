@@ -4,8 +4,8 @@ import 'datatable2.dart';
 
 CreateControlFactory createControl = (CreateControlArgs args) {
   switch (args.control.type) {
-    case "fletdatatable2":
-      return FletDataTable2Control(
+    case "datatable2":
+      return DataTable2Control(
           key: args.key,
           parent: args.parent,
           control: args.control,

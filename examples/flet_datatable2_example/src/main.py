@@ -4,7 +4,7 @@ import math
 import flet as ft
 from data import desserts
 
-from flet_data_table_2 import DataColumn2, DataRow2, DataTable2, Size
+from flet_datatable2 import DataColumn2, DataRow2, DataTable2, Size
 
 logging.basicConfig(level=logging.DEBUG)
 

@@ -497,7 +497,7 @@ class DataTable2(ConstrainedControl):
         self.heading_row_decoration = heading_row_decoration
 
     def _get_control_name(self):
-        return "fletdatatable2"
+        return "datatable2"
 
     def __contains__(self, item):
         return item in self.__columns or item in self.__rows

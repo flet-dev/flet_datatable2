@@ -1,8 +1,8 @@
-name: flet_data_table_2
-description: Flet FletDataTable2 control
-repository: https://github.com/MyGithubAccount/flet-data-table-2/src/flutter/flet_data_table_2
+name: flet_datatable2
+description: Flet DataTable2 control
+repository: https://github.com/flet-dev/flet-datatable2/src/flutter/flet_datatable2
 version: 0.1.0
-homepage: https://github.com/MyGithubAccount/flet-data-table-2
+homepage: https://github.com/flet-dev/flet-datatable2
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

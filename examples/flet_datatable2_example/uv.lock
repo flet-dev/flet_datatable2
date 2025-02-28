@@ -243,7 +243,7 @@ wheels = [
 ]
 
 [[package]]
-name = "flet-data-table-2"
+name = "flet-datatable2"
 version = "0.1.0"
 source = { editable = "../../" }
 dependencies = [
@@ -257,12 +257,12 @@ requires-dist = [{ name = "flet", specifier = ">=0.27.3" }]
 dev = [{ name = "flet", extras = ["all"], specifier = "==0.27.3" }]
 
 [[package]]
-name = "flet-data-table-2-example"
+name = "flet-datatable2-example"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [
     { name = "flet" },
-    { name = "flet-data-table-2" },
+    { name = "flet-datatable2" },
 ]
 
 [package.dev-dependencies]
@@ -273,7 +273,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "flet", specifier = ">=0.27.3" },
-    { name = "flet-data-table-2", editable = "../../" },
+    { name = "flet-datatable2", editable = "../../" },
 ]
 
 [package.metadata.requires-dev]

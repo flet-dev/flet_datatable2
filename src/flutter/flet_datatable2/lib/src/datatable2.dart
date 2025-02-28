@@ -6,14 +6,14 @@ import 'package:flet/flet.dart' as ft;
 import 'package:flet/flet.dart';
 import 'package:flutter/material.dart';
 
-class FletDataTable2Control extends StatefulWidget {
+class DataTable2Control extends StatefulWidget {
   final Control? parent;
   final Control control;
   final List<Control> children;
   final bool parentDisabled;
   final FletControlBackend backend;
 
-  const FletDataTable2Control(
+  const DataTable2Control(
       {super.key,
       this.parent,
       required this.control,
@@ -22,10 +22,10 @@ class FletDataTable2Control extends StatefulWidget {
       required this.backend});
 
   @override
-  State<FletDataTable2Control> createState() => _FletDataTable2ControlState();
+  State<DataTable2Control> createState() => _DataTable2ControlState();
 }
 
-class _FletDataTable2ControlState extends State<FletDataTable2Control>
+class _DataTable2ControlState extends State<DataTable2Control>
     with FletStoreMixin {
   //final ScrollController _horizontalController = ScrollController();
   //final ScrollController _controller = ScrollController();
