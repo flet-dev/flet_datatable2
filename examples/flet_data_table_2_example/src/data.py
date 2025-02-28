@@ -52,7 +52,7 @@ desserts = [
         7,
     ),
     Dessert(
-        "Cupcake!!!",
+        "Cupcake",
         305,
         3.7,
         67,

@@ -340,7 +340,7 @@ class DataRow2(Control):
         self._set_attr("onSelectChanged", True if handler is not None else None)
 
 
-class FletDataTable2(ConstrainedControl):
+class DataTable2(ConstrainedControl):
     def __init__(
         self,
         columns: List[DataColumn2],

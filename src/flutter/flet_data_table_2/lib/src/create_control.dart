@@ -1,6 +1,6 @@
 import 'package:flet/flet.dart';
 
-import 'flet_data_table_2.dart';
+import 'datatable2.dart';
 
 CreateControlFactory createControl = (CreateControlArgs args) {
   switch (args.control.type) {
