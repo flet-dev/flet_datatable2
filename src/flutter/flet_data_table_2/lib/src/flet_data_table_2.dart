@@ -233,6 +233,12 @@ class _FletDataTable2ControlState extends State<FletDataTable2Control>
                               row.control.id, "double_tap");
                         }
                       : null,
+                  onTap: row.control.attrBool("onTap", false)!
+                      ? () {
+                          widget.backend
+                              .triggerControlEvent(row.control.id, "tap");
+                        }
+                      : null,
                   cells: row.children
                       .where((c) => c.type == "datacell" && c.isVisible)
                       .map((cell) => DataCell(
