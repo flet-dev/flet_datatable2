@@ -2,12 +2,10 @@ import logging
 
 import flet as ft
 
-from flet_data_table_2 import DataColumn2, DataRow2, FletDataTable2
-
 
 def main(page: ft.Page):
     page.add(
-        FletDataTable2(
+        ft.DataTable(
             width=700,
             bgcolor="yellow",
             border=ft.border.all(2, "red"),
@@ -23,11 +21,11 @@ def main(page: ft.Page):
             divider_thickness=0,
             column_spacing=200,
             columns=[
-                DataColumn2(
+                ft.DataColumn(
                     ft.Text("Column 1"),
                     on_sort=lambda e: print(f"{e.column_index}, {e.ascending}"),
                 ),
-                DataColumn2(
+                ft.DataColumn(
                     ft.Text("Column 2"),
                     tooltip="This is a second column",
                     numeric=True,
@@ -35,12 +33,12 @@ def main(page: ft.Page):
                 ),
             ],
             rows=[
-                DataRow2(
+                ft.DataRow(
                     [ft.DataCell(ft.Text("A")), ft.DataCell(ft.Text("1"))],
                     selected=True,
                     on_select_changed=lambda e: print(f"row select changed: {e.data}"),
                 ),
-                DataRow2([ft.DataCell(ft.Text("B")), ft.DataCell(ft.Text("2"))]),
+                ft.DataRow([ft.DataCell(ft.Text("B")), ft.DataCell(ft.Text("2"))]),
             ],
         ),
     )
