@@ -90,6 +90,8 @@ def main(page: ft.Page):
                 DataRow2(
                     specific_row_height=50,
                     on_select_changed=select_row,
+                    on_long_press=lambda e: print("On long press"),
+                    on_double_tap=lambda e: print("On double tap"),
                     cells=[
                         ft.DataCell(content=ft.Text(dessert.name)),
                         ft.DataCell(content=ft.Text(dessert.calories)),

@@ -188,6 +188,7 @@ class DataRow2(Control):
         selected: Optional[bool] = None,
         on_long_press: OptionalControlEventCallable = None,
         on_select_changed: OptionalControlEventCallable = None,
+        on_double_tap: OptionalControlEventCallable = None,
         #
         # Control
         #
@@ -205,6 +206,7 @@ class DataRow2(Control):
         self.selected = selected
         self.on_long_press = on_long_press
         self.on_select_changed = on_select_changed
+        self.on_double_tap = on_double_tap
 
     def _get_control_name(self):
         return "datarow2"
@@ -280,6 +282,16 @@ class DataRow2(Control):
     def on_long_press(self, handler: OptionalControlEventCallable):
         self._add_event_handler("long_press", handler)
         self._set_attr("onLongPress", True if handler is not None else None)
+
+    # on_double_tap
+    @property
+    def on_double_tap(self) -> OptionalControlEventCallable:
+        return self._get_event_handler("double_tap")
+
+    @on_double_tap.setter
+    def on_double_tap(self, handler: OptionalControlEventCallable):
+        self._add_event_handler("double_tap", handler)
+        self._set_attr("onDoubleTap", True if handler is not None else None)
 
     # on_select_changed
     @property
