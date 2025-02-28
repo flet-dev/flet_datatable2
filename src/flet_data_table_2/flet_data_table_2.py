@@ -52,19 +52,16 @@ class DataColumnSortEvent(ControlEvent):
 
 
 class DataColumn2(Control):
-    """The summary line for a class docstring should fit on one line.
+    """Column configuration for a FletDataTable2.
 
-    If the class has public attributes, they may be documented here
-    in an ``Attributes`` section and follow the same formatting as a
-    function's ``Args`` section. Alternatively, attributes may be documented
-    inline with the attribute's declaration (see __init__ method below).
+    One column configuration must be provided for each column to display in the table.
 
-    Properties created with the ``@property`` decorator should be documented
-    in the property's getter method.
+    Additional to Flet [DataColumn](https://flet.dev/docs/controls/datatable/#datacolumn), adds the capability to set relative column size via size property.
 
     Attributes:
         label: Description of `label`.
         size: Description of `size`.
+        on_sort: Description of `on_sort`
 
     """
 
@@ -112,7 +109,11 @@ class DataColumn2(Control):
     # label
     @property
     def label(self) -> Control:
-        """str: Properties should be documented in their getter method."""
+        """The column heading.
+
+        Typically, this will be a Text control.
+        It could also be an Icon (typically using size 18), or a Row with an icon and some text.
+        """
         return self.__label
 
     @label.setter

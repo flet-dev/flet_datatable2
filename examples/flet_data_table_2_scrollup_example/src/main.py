@@ -88,7 +88,7 @@ def main(page: ft.Page):
         for dessert in desserts:
             data_rows.append(
                 DataRow2(
-                    specific_row_height=300,
+                    specific_row_height=50,
                     on_select_changed=select_row,
                     cells=[
                         ft.DataCell(content=ft.Text(dessert.name)),

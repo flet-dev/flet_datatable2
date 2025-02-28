@@ -9,7 +9,7 @@ authors = [
 ]
 dependencies = [
   "flet-data-table-2",
-  "flet>=0.27.2",
+  "flet>=0.27.3",
 ]
 
 [tool.flet]
@@ -30,13 +30,16 @@ copyright = "Copyright (C) 2025 by MyCompany"
 [tool.flet.app]
 path = "src"
 
+[tool.flet.dev_packages]
+flet-data-table-2 = "../.." # relative path
+
 [tool.uv]
 dev-dependencies = [
-    "flet[all]==0.27.2",
+    "flet[all]==0.27.3",
 ]
 
 [tool.uv.sources]
 flet-data-table-2 = { path = "../../", editable = true }
 
 [tool.poetry.group.dev.dependencies]
-flet = {extras = ["all"], version = "0.27.2"}
+flet = {extras = ["all"], version = "0.27.3"}
