@@ -1,0 +1,7 @@
+site_name: FletDataTable2
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings
