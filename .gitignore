@@ -2,3 +2,8 @@
 /.venv
 /build
 /src/flet_data_table_2.egg-info
+/examples/flet_data_table_2_scrollup_example/build/.hash
+/examples/flet_data_table_2_scrollup_example/build
+/examples/flet_data_table_2_scrollup_example/src/__pycache__
+/examples/flet_data_table_2_scrollup_example/src/flet_data_table_2_scrollup_example.egg-info
+/examples/flet_data_table_example/build
