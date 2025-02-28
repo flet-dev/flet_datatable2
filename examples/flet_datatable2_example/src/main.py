@@ -1,5 +1,4 @@
 import logging
-import math
 
 import flet as ft
 from data import desserts

@@ -29,11 +29,6 @@ class DataColumn2(Control):
 
     Additional to Flet [DataColumn](https://flet.dev/docs/controls/datatable/#datacolumn), adds the capability to set relative column size via size property.
 
-    Attributes:
-        label: Description of `label`.
-        size: Description of `size`.
-        on_sort: Description of `on_sort`
-
     """
 
     def __init__(
@@ -104,6 +99,10 @@ class DataColumn2(Control):
     # numeric
     @property
     def numeric(self) -> bool:
+        """Whether this column represents numeric data or not.
+
+        The contents of cells of columns containing numeric data are right-aligned."""
+
         return self._get_attr("numeric", data_type="bool", def_value=False)
 
     @numeric.setter
