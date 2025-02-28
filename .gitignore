@@ -8,3 +8,4 @@
 /examples/flet_data_table_example/build
 /site
 /src/flet_datatable2.egg-info
+.DS_Store
