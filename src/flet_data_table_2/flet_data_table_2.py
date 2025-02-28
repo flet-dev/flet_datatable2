@@ -166,6 +166,7 @@ class DataRow2(Control):
         cells: List[DataCell],
         color: ControlStateValue[ColorValue] = None,
         decoration: Optional[BoxDecoration] = None,
+        specific_row_height: OptionalNumber = None,
         selected: Optional[bool] = None,
         on_long_press: OptionalControlEventCallable = None,
         on_select_changed: OptionalControlEventCallable = None,
@@ -182,6 +183,7 @@ class DataRow2(Control):
         self.cells = cells
         self.color = color
         self.decoration = decoration
+        self.specific_row_height = specific_row_height
         self.selected = selected
         self.on_long_press = on_long_press
         self.on_select_changed = on_select_changed
@@ -232,6 +234,15 @@ class DataRow2(Control):
     @decoration.setter
     def decoration(self, value: Optional[BoxDecoration]):
         self.__decoration = value
+
+    # specific_row_height
+    @property
+    def specific_row_height(self) -> OptionalNumber:
+        return self._get_attr("specificRowHeight")
+
+    @specific_row_height.setter
+    def specific_row_height(self, value: OptionalNumber):
+        self._set_attr("specificRowHeight", value)
 
     # selected
     @property

@@ -88,10 +88,7 @@ def main(page: ft.Page):
         for dessert in desserts:
             data_rows.append(
                 DataRow2(
-                    color=ft.Colors.PINK,
-                    decoration=ft.BoxDecoration(
-                        bgcolor=ft.Colors.YELLOW, border=ft.border.all(5)
-                    ),
+                    specific_row_height=300,
                     on_select_changed=select_row,
                     cells=[
                         ft.DataCell(content=ft.Text(dessert.name)),
