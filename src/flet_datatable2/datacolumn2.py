@@ -1,6 +1,6 @@
 import json
 from enum import Enum
-from typing import Any, List, Optional, Union
+from typing import Any, Optional
 
 from flet.core.control import Control, OptionalNumber
 from flet.core.control_event import ControlEvent
@@ -9,6 +9,12 @@ from flet.core.types import MainAxisAlignment, OptionalEventCallable
 
 
 class Size(Enum):
+    """Relative size of a column determines the share of total table width allocated to each individual column.
+
+    When determining column widths, ratios between `S`, `M` and `L` columns are kept (i.e. Large columns are set to 1.2x width of Medium ones).
+    See `DataTable2.smRatio`, `DataTable2.lmRatio`. Default S/M ratio is 0.67, L/M ratio is 1.2.
+    """
+
     S = "s"
     M = "m"
     L = "l"
@@ -23,7 +29,7 @@ class DataColumnSortEvent(ControlEvent):
 
 
 class DataColumn2(Control):
-    """Column configuration for a FletDataTable2.
+    """Column configuration for a [DataTable2](/datatable2).
 
     One column configuration must be provided for each column to display in the table.
 
@@ -89,6 +95,10 @@ class DataColumn2(Control):
     # size
     @property
     def size(self) -> Optional[Size]:
+        """Column sizes are determined based on available width by distributing it to individual columns accounting for their relative sizes.
+
+        Value is of type `Size` and defaults to `Size.S`.
+        """
         return self.__size
 
     @size.setter
@@ -112,6 +122,7 @@ class DataColumn2(Control):
     # fixed_width
     @property
     def fixed_width(self) -> OptionalNumber:
+        """Defines absolute width of the column in pixel (as opposed to relative `size` used by default)."""
         return self._get_attr("fixedWidth")
 
     @fixed_width.setter
@@ -121,6 +132,10 @@ class DataColumn2(Control):
     # tooltip
     @property
     def tooltip(self) -> Optional[str]:
+        """The column heading's tooltip.
+
+        This is a longer description of the column heading, for cases where the heading might have been abbreviated to keep the column width to a reasonable size.
+        """
         return self._get_attr("tooltip")
 
     @tooltip.setter
@@ -130,6 +145,10 @@ class DataColumn2(Control):
     # heading_row_alignment
     @property
     def heading_row_alignment(self) -> Optional[MainAxisAlignment]:
+        """Defines the horizontal layout of the label and sort indicator in the heading row.
+
+        Value is of type [MainAxisAlignment](https://flet.dev/docs/reference/types/mainaxisalignment) and defaults to `MainAxisAlignment.START`.
+        """
         return self.__heading_row_alignment
 
     @heading_row_alignment.setter
@@ -140,6 +159,9 @@ class DataColumn2(Control):
     # on_sort
     @property
     def on_sort(self) -> OptionalEventCallable["DataColumnSortEvent"]:
+        """Called when the user asks to sort the table using this column.
+
+        If not set, the column will not be considered sortable."""
         return self.__on_sort.handler
 
     @on_sort.setter
