@@ -3,7 +3,7 @@ DataTable2 control for Flet
 
 ## Installation
 
-Add dependency to pyproject.toml of your Flet app:
+Add dependency to `pyproject.toml` of your Flet app:
 
 ```
 dependencies = [
