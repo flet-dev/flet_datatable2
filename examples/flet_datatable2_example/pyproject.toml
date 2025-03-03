@@ -10,6 +10,7 @@ authors = [
 dependencies = [
   "flet-datatable2",
   "flet>=0.27.3",
+  "blur @ git+https://github.com/shiena/flet-blur.git"
 ]
 
 [tool.flet]

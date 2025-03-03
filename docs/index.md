@@ -1,101 +1,27 @@
 # DataTable2
 
-DataTable2 Control for Flet based on [DataTable2 package](https://pub.dev/packages/data_table_2) for Flutter
+DataTable2 Control for Flet based on [DataTable2 package](https://pub.dev/packages/data_table_2) for Flutter. 
+
+DataTable2 features fixed/sticky header/top rows and left columns and many other useful features additionally to all the properties of built-in Flet [DataTable](https://flet.dev/docs/controls/datatable).
+
+## Installation
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/layout/datatable)
+[Live example](https://flet-controls-gallery.fly.dev/layout/datatable2)
 
-### A simple DataTable
+### DataTable2 with fixed heading row and sorting
 
-<img src="/img/docs/controls/datatable/datatable-minimal.png" className="screenshot-50"/>
+<img src="assets/datatable2-example.gif">
 
-```python
-import flet as ft
+See source code for this example [here](https://github.com/flet-dev/flet_datatable2/tree/main/examples/flet_datatable2_example/src).
 
-def main(page: ft.Page):
-    page.add(
-        ft.DataTable(
-            columns=[
-                ft.DataColumn(ft.Text("First name")),
-                ft.DataColumn(ft.Text("Last name")),
-                ft.DataColumn(ft.Text("Age"), numeric=True),
-            ],
-            rows=[
-                ft.DataRow(
-                    cells=[
-                        ft.DataCell(ft.Text("John")),
-                        ft.DataCell(ft.Text("Smith")),
-                        ft.DataCell(ft.Text("43")),
-                    ],
-                ),
-                ft.DataRow(
-                    cells=[
-                        ft.DataCell(ft.Text("Jack")),
-                        ft.DataCell(ft.Text("Brown")),
-                        ft.DataCell(ft.Text("19")),
-                    ],
-                ),
-                ft.DataRow(
-                    cells=[
-                        ft.DataCell(ft.Text("Alice")),
-                        ft.DataCell(ft.Text("Wong")),
-                        ft.DataCell(ft.Text("25")),
-                    ],
-                ),
-            ],
-        ),
-    )
+## Classes
 
-ft.app(main)
-```
+[DataTable2](/docs/datatable2.md)
 
-### A styled DataTable
+[DataColumn2](/docs/datacolumn2.md)
 
-<img src="/img/docs/controls/datatable/datatable-styled.png" className="screenshot-70"/>
+[DataRow2](/docs/datarow2.md)
 
-```python
-import flet as ft
 
-def main(page: ft.Page):
-    page.add(
-        ft.DataTable(
-            width=700,
-            bgcolor="yellow",
-            border=ft.border.all(2, "red"),
-            border_radius=10,
-            vertical_lines=ft.BorderSide(3, "blue"),
-            horizontal_lines=ft.BorderSide(1, "green"),
-            sort_column_index=0,
-            sort_ascending=True,
-            heading_row_color=ft.Colors.BLACK12,
-            heading_row_height=100,
-            data_row_color={ft.ControlState.HOVERED: "0x30FF0000"},
-            show_checkbox_column=True,
-            divider_thickness=0,
-            column_spacing=200,
-            columns=[
-                ft.DataColumn(
-                    ft.Text("Column 1"),
-                    on_sort=lambda e: print(f"{e.column_index}, {e.ascending}"),
-                ),
-                ft.DataColumn(
-                    ft.Text("Column 2"),
-                    tooltip="This is a second column",
-                    numeric=True,
-                    on_sort=lambda e: print(f"{e.column_index}, {e.ascending}"),
-                ),
-            ],
-            rows=[
-                ft.DataRow(
-                    [ft.DataCell(ft.Text("A")), ft.DataCell(ft.Text("1"))],
-                    selected=True,
-                    on_select_changed=lambda e: print(f"row select changed: {e.data}"),
-                ),
-                ft.DataRow([ft.DataCell(ft.Text("B")), ft.DataCell(ft.Text("2"))]),
-            ],
-        ),
-    )
-
-ft.app(main)
-```

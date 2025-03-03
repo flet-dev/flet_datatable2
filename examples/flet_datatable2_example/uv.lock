@@ -51,6 +51,14 @@ wheels = [
 ]
 
 [[package]]
+name = "blur"
+version = "0.1.0"
+source = { git = "https://github.com/shiena/flet-blur.git#a638af899400f4dc52f6c86c40297a3562e8b655" }
+dependencies = [
+    { name = "flet" },
+]
+
+[[package]]
 name = "certifi"
 version = "2025.1.31"
 source = { registry = "https://pypi.org/simple" }
@@ -261,6 +269,7 @@ name = "flet-datatable2-example"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "blur" },
     { name = "flet" },
     { name = "flet-datatable2" },
 ]
@@ -272,6 +281,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "blur", git = "https://github.com/shiena/flet-blur.git" },
     { name = "flet", specifier = ">=0.27.3" },
     { name = "flet-datatable2", editable = "../../" },
 ]
