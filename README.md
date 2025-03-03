@@ -7,7 +7,7 @@ Add dependency to `pyproject.toml` of your Flet app:
 
 ```
 dependencies = [
-  "flet-datatable2 @ git+https://github.com/flet-dev/flet-datatable2.git",
+  "flet-datatable2 @ git+https://github.com/flet-dev/flet_datatable2.git",
   "flet>=0.27.4",
 ]
 ```
