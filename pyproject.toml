@@ -23,10 +23,16 @@ Issues = "https://github.com/MyGithubAccount/flet-datatable2/issues"
 [tool.uv]
 dev-dependencies = [
     "flet[all]==0.27.3",
+    "mkdocs", 
+    "mkdocs-material",
+    "mkdocstrings[python]"
 ]
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.27.3"}
+mkdocs = "^1.0"
+mkdocstrings = { extras = ["python"], version = "^0.10" }
+mkdocs-material = "^8.0"
 
 [tool.setuptools]
 license-files = []
