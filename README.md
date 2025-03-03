@@ -16,3 +16,7 @@ Build your app:
 ```
 flet build macos -v
 ```
+
+## Documentation
+
+https://flet-dev.github.io/flet-datatable2/
