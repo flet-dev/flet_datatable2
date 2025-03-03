@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
     
     
       
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#datatable2" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DataTable2
+              Introduction
             
           </span>
         </div>
@@ -167,7 +167,7 @@
           
   
   <span class="md-ellipsis">
-    DataTable2
+    Introduction
     
   </span>
   
@@ -179,7 +179,7 @@
         
   
   <span class="md-ellipsis">
-    DataTable2
+    Introduction
     
   </span>
   
@@ -202,6 +202,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       Examples
@@ -210,6 +219,15 @@
   
     <nav class="md-nav" aria-label="Examples">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datatable2-with-empty-property-and-no-data-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      DataTable2 with empty property and no data rows
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#datatable2-with-fixed-heading-row-and-sorting" class="md-nav__link">
@@ -222,6 +240,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
   
 </li>
       
@@ -323,6 +350,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       Examples
@@ -331,6 +367,15 @@
   
     <nav class="md-nav" aria-label="Examples">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datatable2-with-empty-property-and-no-data-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      DataTable2 with empty property and no data rows
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#datatable2-with-fixed-heading-row-and-sorting" class="md-nav__link">
@@ -343,6 +388,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
   
 </li>
       
@@ -362,124 +416,38 @@
 
 
 
-<h1 id="datatable2">DataTable2</h1>
+<h1 id="introduction">Introduction</h1>
 <p>DataTable2 Control for Flet based on <a href="https://pub.dev/packages/data_table_2">DataTable2 package</a> for Flutter. </p>
 <p>DataTable2 features fixed/sticky header/top rows and left columns and many other useful features additionally to all the properties of built-in Flet <a href="https://flet.dev/docs/controls/datatable">DataTable</a>.</p>
+<h2 id="installation">Installation</h2>
 <h2 id="examples">Examples</h2>
 <p><a href="https://flet-controls-gallery.fly.dev/layout/datatable2">Live example</a></p>
-<h3 id="datatable2-with-fixed-heading-row-and-sorting">DataTable2 with fixed heading row and sorting</h3>
-<p><img src="/img/docs/controls/datatable/datatable-minimal.png" className="screenshot-50"/></p>
-<pre><code class="language-python">import flet as ft
-from data import desserts
-
-from flet_datatable2 import DataColumn2, DataRow2, DataTable2, Size
+<h3 id="datatable2-with-empty-property-and-no-data-rows">DataTable2 with <code>empty</code> property and no data rows</h3>
+<pre><code>import flet as ft
+from flet_datatable2 import DataColumn2, DataTable2
 
 def main(page: ft.Page):
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-
-    def select_row(e):
-        e.control.selected = not e.control.selected
-        e.control.update()
-
-    def sort_column(e):
-        dt.sort_column_index = e.column_index
-        dt.sort_ascending = e.ascending
-        sorted_desserts = sorted(
-            desserts,
-            key=lambda d: getattr(d, e.control.label.value.lower()),
-            reverse=not dt.sort_ascending,
-        )
-        dt.rows = get_data_rows(sorted_desserts)
-        dt.update()
-
-    def get_data_columns():
-        data_columns = [
-            DataColumn2(
-                size=Size.L,
-                label=ft.Text(&quot;Name&quot;),
-                on_sort=sort_column,
-                heading_row_alignment=ft.MainAxisAlignment.START,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Calories&quot;),
-                on_sort=sort_column,
-                numeric=True,
-                heading_row_alignment=ft.MainAxisAlignment.END,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Fat&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Carbs&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Protein&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-            DataColumn2(
-                label=ft.Text(&quot;Sodium&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Calcium&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-            DataColumn2(
-                ft.Text(&quot;Iron&quot;),
-                on_sort=sort_column,
-                numeric=True,
-            ),
-        ]
-        return data_columns
-
-    def get_data_rows(desserts):
-        data_rows = []
-        for dessert in desserts:
-            data_rows.append(
-                DataRow2(
-                    specific_row_height=50,
-                    on_select_changed=select_row,
-                    cells=[
-                        ft.DataCell(content=ft.Text(dessert.name)),
-                        ft.DataCell(content=ft.Text(dessert.calories)),
-                        ft.DataCell(content=ft.Text(dessert.fat)),
-                        ft.DataCell(content=ft.Text(dessert.carbs)),
-                        ft.DataCell(content=ft.Text(dessert.protein)),
-                        ft.DataCell(content=ft.Text(dessert.sodium)),
-                        ft.DataCell(content=ft.Text(dessert.calcium)),
-                        ft.DataCell(content=ft.Text(dessert.iron)),
-                    ],
-                )
-            )
-        return data_rows
-
     page.add(
-        dt := DataTable2(
-            show_checkbox_column=True,
-            expand=True,
-            column_spacing=0,
-            fixed_top_rows=1,
-            heading_row_color=ft.Colors.SECONDARY_CONTAINER,
-            horizontal_margin=12,
-            sort_ascending=True,
-            bottom_margin=10,
-            min_width=600,
-            columns=get_data_columns(),
-            rows=get_data_rows(desserts),
+        DataTable2(
+            columns=[
+                DataColumn2(ft.Text(&quot;First name&quot;)),
+                DataColumn2(ft.Text(&quot;Last name&quot;)),
+                DataColumn2(ft.Text(&quot;Age&quot;), numeric=True),
+            ],
+            empty=ft.Text(&quot;This table is empty.&quot;),
         ),
     )
 
 
 ft.app(main)
 </code></pre>
+<h3 id="datatable2-with-fixed-heading-row-and-sorting">DataTable2 with fixed heading row and sorting</h3>
+<p><img src="assets/datatable2-example.gif"></p>
+<p>See source code for this example <a href="https://github.com/flet-dev/flet_datatable2/tree/main/examples/flet_datatable2_example/src">here</a>.</p>
+<h2 id="classes">Classes</h2>
+<p><a href="/docs/datatable2.md">DataTable2</a></p>
+<p><a href="/docs/datacolumn2.md">DataColumn2</a></p>
+<p><a href="/docs/datarow2.md">DataRow2</a></p>
 
 
 
@@ -529,7 +497,7 @@ ft.app(main)
     <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.f1b6f286.min.js"></script>
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>
