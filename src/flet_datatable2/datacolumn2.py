@@ -81,10 +81,8 @@ class DataColumn2(Control):
     # label
     @property
     def label(self) -> Control:
-        """The column heading.
-
-        Typically, this will be a Text control.
-        It could also be an Icon (typically using size 18), or a Row with an icon and some text.
+        """
+        See DataColumn [label](https://flet.dev/docs/controls/datatable#label).
         """
         return self.__label
 
@@ -95,7 +93,10 @@ class DataColumn2(Control):
     # size
     @property
     def size(self) -> Optional[Size]:
-        """Column sizes are determined based on available width by distributing it to individual columns accounting for their relative sizes.
+        """
+        **NEW**
+
+        Column sizes are determined based on available width by distributing it to individual columns accounting for their relative sizes.
 
         Value is of type `Size` and defaults to `Size.S`.
         """
@@ -109,9 +110,9 @@ class DataColumn2(Control):
     # numeric
     @property
     def numeric(self) -> bool:
-        """Whether this column represents numeric data or not.
-
-        The contents of cells of columns containing numeric data are right-aligned."""
+        """
+        See DataColumn [numeric](https://flet.dev/docs/controls/datatable#numeric).
+        """
 
         return self._get_attr("numeric", data_type="bool", def_value=False)
 
@@ -122,7 +123,11 @@ class DataColumn2(Control):
     # fixed_width
     @property
     def fixed_width(self) -> OptionalNumber:
-        """Defines absolute width of the column in pixel (as opposed to relative `size` used by default)."""
+        """
+        **NEW**
+
+        Defines absolute width of the column in pixel (as opposed to relative `size` used by default).
+        """
         return self._get_attr("fixedWidth")
 
     @fixed_width.setter
@@ -132,9 +137,8 @@ class DataColumn2(Control):
     # tooltip
     @property
     def tooltip(self) -> Optional[str]:
-        """The column heading's tooltip.
-
-        This is a longer description of the column heading, for cases where the heading might have been abbreviated to keep the column width to a reasonable size.
+        """
+        See DataColumn [tooltip](https://flet.dev/docs/controls/datatable#tooltip).
         """
         return self._get_attr("tooltip")
 
@@ -145,9 +149,8 @@ class DataColumn2(Control):
     # heading_row_alignment
     @property
     def heading_row_alignment(self) -> Optional[MainAxisAlignment]:
-        """Defines the horizontal layout of the label and sort indicator in the heading row.
-
-        Value is of type [MainAxisAlignment](https://flet.dev/docs/reference/types/mainaxisalignment) and defaults to `MainAxisAlignment.START`.
+        """
+        See DataColumn [heading_row_alignment](https://flet.dev/docs/controls/datatable#heading_row_alignment).
         """
         return self.__heading_row_alignment
 
@@ -159,9 +162,9 @@ class DataColumn2(Control):
     # on_sort
     @property
     def on_sort(self) -> OptionalEventCallable["DataColumnSortEvent"]:
-        """Called when the user asks to sort the table using this column.
-
-        If not set, the column will not be considered sortable."""
+        """
+        See DataColumn [on_sort](https://flet.dev/docs/controls/datatable#on_sort).
+        """
         return self.__on_sort.handler
 
     @on_sort.setter

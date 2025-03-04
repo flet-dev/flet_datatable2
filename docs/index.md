@@ -40,10 +40,10 @@ See source code for this example [here](https://github.com/flet-dev/flet_datatab
 
 ## Classes
 
-[DataTable2](/docs/datatable2.md)
+[DataTable2](/datatable2)
 
-[DataColumn2](/docs/datacolumn2.md)
+[DataColumn2](/datacolumn2)
 
-[DataRow2](/docs/datarow2.md)
+[DataRow2](/datarow2)
 
 

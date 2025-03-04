@@ -100,7 +100,6 @@ def main(page: ft.Page):
             show_checkbox_column=True,
             expand=True,
             column_spacing=0,
-            fixed_top_rows=1,
             heading_row_color=ft.Colors.SECONDARY_CONTAINER,
             horizontal_margin=12,
             sort_ascending=True,

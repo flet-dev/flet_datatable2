@@ -7,6 +7,12 @@ from flet.core.types import ColorValue, ControlStateValue, OptionalControlEventC
 
 
 class DataRow2(Control):
+    """
+    Extension of [DataRow](https://flet.dev/docs/controls/datatable#datarow).
+
+    Adds row level `tap` events. There are also `onSecondaryTap` and `onSecondaryTapDown` which are not available in DataCells and which can be useful in Desktop settings when a reaction to the right click is required.
+    """
+
     def __init__(
         self,
         cells: List[DataCell],
@@ -62,6 +68,9 @@ class DataRow2(Control):
     # cells
     @property
     def cells(self) -> List[DataCell]:
+        """
+        See DataRow [cells](https://flet.dev/docs/controls/datatable#cells).
+        """
         return self.__cells
 
     @cells.setter
@@ -74,6 +83,9 @@ class DataRow2(Control):
     # color
     @property
     def color(self) -> ControlStateValue[str]:
+        """
+        See DataRow [color](https://flet.dev/docs/controls/datatable#color).
+        """
         return self.__color
 
     @color.setter
@@ -83,6 +95,12 @@ class DataRow2(Control):
     # decoration
     @property
     def decoration(self) -> Optional[BoxDecoration]:
+        """
+        **NEW**
+
+        Decoration to be applied to the given row. Value is an instance of [BoxDecoration](https://flet.dev/docs/reference/types/boxdecoration).
+        When applied, it `divider_thickness` won't take effect.
+        """
         return self.__decoration
 
     @decoration.setter
@@ -92,6 +110,11 @@ class DataRow2(Control):
     # specific_row_height
     @property
     def specific_row_height(self) -> OptionalNumber:
+        """
+        **NEW**
+
+        Specific row height. If not provided, `data_row_height` will be applied.
+        """
         return self._get_attr("specificRowHeight")
 
     @specific_row_height.setter
@@ -101,6 +124,9 @@ class DataRow2(Control):
     # selected
     @property
     def selected(self) -> bool:
+        """
+        See DataRow [selected](https://flet.dev/docs/controls/datatable#selected).
+        """
         return self._get_attr("selected", data_type="bool", def_value=False)
 
     @selected.setter
@@ -110,6 +136,9 @@ class DataRow2(Control):
     # on_long_press
     @property
     def on_long_press(self) -> OptionalControlEventCallable:
+        """
+        See DataRow [on_long_press](https://flet.dev/docs/controls/datatable#on_long_press).
+        """
         return self._get_event_handler("long_press")
 
     @on_long_press.setter
@@ -120,6 +149,11 @@ class DataRow2(Control):
     # on_tap
     @property
     def on_tap(self) -> OptionalControlEventCallable:
+        """
+        **NEW**
+
+        Row tap handler. Won't be called if tapped cell has `tap` event handler.
+        """
         return self._get_event_handler("tap")
 
     @on_tap.setter
@@ -130,6 +164,11 @@ class DataRow2(Control):
     # on_double_tap
     @property
     def on_double_tap(self) -> OptionalControlEventCallable:
+        """
+        **NEW**
+
+        Row double tap handler. Won't be called if tapped cell has `tap` event handler.
+        """
         return self._get_event_handler("double_tap")
 
     @on_double_tap.setter
@@ -140,6 +179,11 @@ class DataRow2(Control):
     # on_secondary_tap
     @property
     def on_secondary_tap(self) -> OptionalControlEventCallable:
+        """
+        **NEW**
+
+        Row right click handler. Won't be called if tapped cell has `tap` event.
+        """
         return self._get_event_handler("secondary_tap")
 
     @on_secondary_tap.setter
@@ -150,6 +194,11 @@ class DataRow2(Control):
     # on_secondary_tap_down
     @property
     def on_secondary_tap_down(self) -> OptionalControlEventCallable:
+        """
+        **NEW**
+
+        Row right mouse down handler. Won't be called if tapped cell has `tap` event handler.
+        """
         return self._get_event_handler("secondary_tap_down")
 
     @on_secondary_tap_down.setter
@@ -160,6 +209,9 @@ class DataRow2(Control):
     # on_select_changed
     @property
     def on_select_changed(self) -> OptionalControlEventCallable:
+        """
+        See DataRow [on_select_changed](https://flet.dev/docs/controls/datatable#on_select_changed).
+        """
         return self._get_event_handler("select_changed")
 
     @on_select_changed.setter

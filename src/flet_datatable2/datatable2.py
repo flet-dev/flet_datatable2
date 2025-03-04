@@ -1,5 +1,3 @@
-import json
-from enum import Enum
 from typing import Any, List, Optional, Union
 
 from flet.core.alignment import Alignment
@@ -9,10 +7,6 @@ from flet.core.border import Border, BorderSide
 from flet.core.box import BoxDecoration
 from flet.core.constrained_control import ConstrainedControl
 from flet.core.control import Control, OptionalNumber
-from flet.core.control_event import ControlEvent
-from flet.core.datatable import DataCell
-from flet.core.event_handler import EventHandler
-from flet.core.gesture_detector import TapEvent
 from flet.core.gradients import Gradient
 from flet.core.ref import Ref
 from flet.core.text_style import TextStyle
@@ -27,10 +21,8 @@ from flet.core.types import (
     DurationValue,
     IconEnums,
     IconValue,
-    MainAxisAlignment,
     OffsetValue,
     OptionalControlEventCallable,
-    OptionalEventCallable,
     ResponsiveNumber,
     RotateValue,
     ScaleValue,
@@ -41,6 +33,13 @@ from flet_datatable2.datarow2 import DataRow2
 
 
 class DataTable2(ConstrainedControl):
+    """In-place replacement of standard Flet [DataTable](https://flet.dev/docs/controls/datatable).
+
+    Has the header row always fixed and core of the table (with data rows) scrollable and stretching to max width/height of it's container.
+    By using [DataColumn2](/datacolumn2) instead of [DataColumn](https://flet.dev/docs/controls/datatable#datacolumn) it is possible to control relative column sizes (setting them to S, M and L).
+    [DataRow2](/datarow2) provides row-level tap event handlers.
+    """
+
     def __init__(
         self,
         columns: List[DataColumn2],
@@ -252,6 +251,11 @@ class DataTable2(ConstrainedControl):
     # empty
     @property
     def empty(self) -> Control:
+        """
+        **NEW**
+
+        Placeholder control which is displayed whenever the data rows are empty. The widget will be displayed below heading row.
+        """
         return self.__empty
 
     @empty.setter
@@ -261,6 +265,9 @@ class DataTable2(ConstrainedControl):
     # columns
     @property
     def columns(self) -> List[DataColumn2]:
+        """
+        A list of [DataColumn2](/datacolumn2) controls describing table columns.
+        """
         return self.__columns
 
     @columns.setter
@@ -273,6 +280,9 @@ class DataTable2(ConstrainedControl):
     # rows
     @property
     def rows(self) -> Optional[List[DataRow2]]:
+        """
+        A list of [DataRow2](/datarow2) controls defining table rows.
+        """
         return self.__rows
 
     @rows.setter
@@ -285,6 +295,11 @@ class DataTable2(ConstrainedControl):
     # fixed_left_columns
     @property
     def fixed_left_columns(self) -> Optional[int]:
+        """
+        **NEW**
+
+        The number of sticky columns fixed at the left side of the table. Check box column (if enabled) is also counted.
+        """
         return self._get_attr("fixedLeftColumns")
 
     @fixed_left_columns.setter
@@ -294,6 +309,13 @@ class DataTable2(ConstrainedControl):
     # fixed_top_rows
     @property
     def fixed_top_rows(self) -> Optional[int]:
+        """
+        **NEW**
+
+        The number of sticky rows fixed at the top of the table. The heading row is counted/included.
+        By defult the value is 1 which means header row is fixed.
+        Set to 0 in order to unstick the header, set to >1 in order to fix data rows (i.e. in order to fix both header and the first data row use value of 2).
+        """
         return self._get_attr("fixedTopRows")
 
     @fixed_top_rows.setter
@@ -303,6 +325,11 @@ class DataTable2(ConstrainedControl):
     # fixed_columns_color
     @property
     def fixed_columns_color(self) -> Optional[ColorValue]:
+        """
+        **NEW**
+
+        Backgound color of the sticky columns fixed via `fixed_left_columns`.
+        """
         return self.__fixed_columns_color
 
     @fixed_columns_color.setter
@@ -313,6 +340,11 @@ class DataTable2(ConstrainedControl):
     # fixed_corner_color
     @property
     def fixed_corner_color(self) -> Optional[ColorValue]:
+        """
+        **NEW**
+
+        Backgound color of the top left corner which is fixed when both `fixed_top_rows` and `fixed_left_columns` are greater than 0.
+        """
         return self.__fixed_corner_color
 
     @fixed_corner_color.setter
@@ -323,6 +355,11 @@ class DataTable2(ConstrainedControl):
     # bottom_margin
     @property
     def bottom_margin(self) -> OptionalNumber:
+        """
+        **NEW**
+
+        If set, the table will have empty space added after the the last row.
+        """
         return self._get_attr("bottomMargin")
 
     @bottom_margin.setter
@@ -332,6 +369,11 @@ class DataTable2(ConstrainedControl):
     # sort_arrow_icon
     @property
     def sort_arrow_icon(self):
+        """
+        **NEW**
+
+        Icon to be displayed when sorting is applied to a column. If not set, the default icon is `Icons.ARROW_UPWARD`.
+        """
         return self.__sort_arrow_icon
 
     @sort_arrow_icon.setter
@@ -342,6 +384,12 @@ class DataTable2(ConstrainedControl):
     # sort_arrow_animation_duration
     @property
     def sort_arrow_animation_duration(self) -> Optional[DurationValue]:
+        """
+        **NEW**
+
+        When changing sort direction an arrow icon in the header is rotated clockwise. The value defines the duration of the rotation animation.
+        If not set, the default animation duration is 150 ms.
+        """
         return self.__sort_arrow_animation_duration
 
     @sort_arrow_animation_duration.setter
@@ -351,6 +399,13 @@ class DataTable2(ConstrainedControl):
     # lm_ratio
     @property
     def lm_ratio(self) -> OptionalNumber:
+        """
+        **NEW**
+
+        Determines ratio of Large column's width to Medium column's width. I.e. 2.0 means that Large column is twice wider than Medium column.
+
+        The default value is `1.2`.
+        """
         return self._get_attr("lmRatio")
 
     @lm_ratio.setter
@@ -360,6 +415,13 @@ class DataTable2(ConstrainedControl):
     # sm_ratio
     @property
     def sm_ratio(self) -> OptionalNumber:
+        """
+        **NEW**
+
+        Determines ratio of Small column's width to Medium column's width. I.e. 0.5 means that Small column is twice narrower than Medium column.
+
+        The default value is `0.67`.
+        """
         return self._get_attr("smRatio")
 
     @sm_ratio.setter
@@ -369,6 +431,12 @@ class DataTable2(ConstrainedControl):
     # min_width
     @property
     def min_width(self) -> OptionalNumber:
+        """
+        **NEW**
+
+        If set, the table will stop shrinking below the threshold and provide horizontal scrolling.
+        Useful for the cases with narrow screens (e.g. portrait phone orientation) and lots of columns.
+        """
         return self._get_attr("minWidth")
 
     @min_width.setter
@@ -378,6 +446,9 @@ class DataTable2(ConstrainedControl):
     # border
     @property
     def border(self) -> Optional[Border]:
+        """
+        See DataTable [border](https://flet.dev/docs/controls/datatable#border).
+        """
         return self.__border
 
     @border.setter
@@ -387,6 +458,9 @@ class DataTable2(ConstrainedControl):
     # border_radius
     @property
     def border_radius(self) -> Optional[BorderRadiusValue]:
+        """
+        See DataTable [border_radius](https://flet.dev/docs/controls/datatable#border_radius).
+        """
         return self.__border_radius
 
     @border_radius.setter
@@ -396,6 +470,7 @@ class DataTable2(ConstrainedControl):
     # horizontal_lines
     @property
     def horizontal_lines(self) -> Optional[BorderSide]:
+
         return self.__horizontal_lines
 
     @horizontal_lines.setter

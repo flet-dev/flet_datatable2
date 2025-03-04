@@ -113,7 +113,7 @@ class _DataTable2ControlState extends State<DataTable2Control>
             isVerticalScrollBarVisible:
                 widget.control.attrBool("isVerticalScrollBarVisible"),
             fixedLeftColumns: widget.control.attrInt("fixedLeftColumns") ?? 0,
-            fixedTopRows: widget.control.attrInt("fixedTopRows") ?? 0,
+            fixedTopRows: widget.control.attrInt("fixedTopRows") ?? 1,
             fixedColumnsColor:
                 widget.control.attrColor("fixedColumnsColor", context),
             fixedCornerColor:
